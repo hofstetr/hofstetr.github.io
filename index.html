@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimpliLoad for Cognos - On-Premises Load Testing Solution</title>
+    <title>Hofstetter Computer Consulting – Enterprise Tools</title>
     <style>
         :root {
-            --primary: #0f62fe; /* IBM Blue inspired palette for professional look */
+            --primary: #0f62fe;
             --blue-header: #1E3A5F;
             --dark: #161616;
             --light: #f4f4f4;
@@ -37,10 +37,47 @@
             color: #e0e0e0;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 3rem 1rem;
         }
+
+        /* Products Section */
+        .products {
+            margin-bottom: 3rem;
+        }
+        .products h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        .product-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .product-card h3 {
+            margin-top: 0;
+            color: var(--dark);
+        }
+        .product-card p {
+            margin-bottom: 0.75rem;
+        }
+        .product-card a {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .product-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Existing SimpliLoad Sections */
         .hero {
             text-align: center;
             margin-bottom: 3rem;
@@ -66,6 +103,8 @@
         li {
             margin-bottom: 0.5rem;
         }
+
+        /* Contact */
         .contact {
             text-align: center;
             background-color: #ffffff;
@@ -87,6 +126,7 @@
         .btn:hover {
             background-color: #0353e9;
         }
+
         footer {
             text-align: center;
             padding: 2rem 1rem;
@@ -99,12 +139,34 @@
 <body>
 
     <header>
-        <h1>SimpliLoad for Cognos</h1>
-        <p>The easiest way to load test Cognos</p>
+        <h1>Hofstetter Computer Consulting</h1>
+        <p>Enterprise Tools & Performance Engineering</p>
     </header>
 
     <div class="container">
-        <section class="hero">
+
+        <!-- Products Section -->
+        <section class="products">
+            <h2>Products</h2>
+
+            <div class="product-card">
+                <h3>SimpliLoad for Cognos</h3>
+                <p>An on-premises load testing solution purpose-built for IBM Cognos Analytics environments.</p>
+                <a href="#simpliload">Learn more →</a>
+            </div>
+
+            <!-- Future product cards go here -->
+            <!--
+            <div class="product-card">
+                <h3>NextApp Name</h3>
+                <p>Short description of your next application.</p>
+                <a href="#nextapp">Learn more →</a>
+            </div>
+            -->
+        </section>
+
+        <!-- SimpliLoad Section -->
+        <section id="simpliload" class="hero">
             <h2>Enterprise Performance Validation Made Simple</h2>
             <p>SimpliLoad is a dedicated, on-premises performance and load testing utility built specifically for <strong>IBM Cognos Analytics</strong> environments. It empowers BI administrators and infrastructure teams to proactively validate server capacity, optimize environments, and confidently plan system upgrades.</p>
         </section>
