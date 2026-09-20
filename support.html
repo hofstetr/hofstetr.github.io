@@ -7,128 +7,97 @@
 <body>
 
 <h1>SimpliLoad Support Policy</h1>
-<p><strong>Version 1.0 — Hofstetter Computer Consulting LLC</strong></p>
-<p><strong>Effective Date:</strong> September 11, 2026</p>
+<p><strong>Version 1.1 — Hofstetter Computer Consulting LLC</strong></p>
+<p><strong>Effective Date:</strong> September 20, 2026</p>
 
 <h2>1. Scope of Support</h2>
 <p>
   This Support Policy describes the support services provided by Hofstetter Computer Consulting LLC
-  (“Licensor”) for the SimpliLoad software (“Software”). Support is intended to assist customers with
-  installation, configuration, operation, and troubleshooting of the Software within their own
-  environments.
+  (“Licensor”) for the SimpliLoad software (“Software”) during active, paid subscription periods. Support 
+  is provided to assist customers with the installation, configuration, and operational troubleshooting 
+  of the unmodified Software container.
 </p>
 <p>
-  Support includes assistance with:
+  In-scope support is limited to:
 </p>
 <ul>
-  <li>initial installation and deployment of the Software;</li>
-  <li>configuration of SimpliLoad settings and environment variables;</li>
-  <li>troubleshooting issues related to the Software's operation;</li>
-  <li>questions regarding load test execution and interpreting results;</li>
-  <li>diagnosing errors or unexpected behavior within the Software container.</li>
+  <li>guidance on deploying the official SimpliLoad Docker Compose stack;</li>
+  <li>configuration of supported SimpliLoad environment variables and application settings;</li>
+  <li>investigating and diagnosing verified application bugs or unexpected errors within the Software container;</li>
+  <li>clarification on test execution workflows, in-app documentation, and load report outputs.</li>
 </ul>
 
-<h2>2. Support Limitations</h2>
+<h2>2. Excluded Support (Out of Scope)</h2>
 <p>
-  Support does <strong>not</strong> include assistance with:
+  Support is strictly limited to the Software itself. Licensor does <strong>not</strong> provide assistance with:
 </p>
 <ul>
-  <li>installation, configuration, or troubleshooting of IBM Cognos Analytics;</li>
-  <li>customer infrastructure, including servers, networks, firewalls, or operating systems;</li>
-  <li>installation or configuration of Docker or Docker Compose;</li>
-  <li>performance tuning or optimization of Cognos Analytics;</li>
-  <li>custom development, scripting, or modifications to the Software;</li>
-  <li>on-site services or remote access to customer systems.</li>
+  <li>installation, administration, performance tuning, or troubleshooting of IBM Cognos Analytics;</li>
+  <li>customer-side host infrastructure, operating systems, cloud providers, firewalls, routing, or DNS;</li>
+  <li>installation, maintenance, or debugging of Docker Engine or Docker Compose;</li>
+  <li>custom development, database modifications, or reverse-engineering of the Software;</li>
+  <li>synchronous screen-shares, phone calls, on-site visits, or direct remote access to customer environments.</li>
 </ul>
+
+<h2>3. Support Channels and Availability</h2>
 <p>
-  Licensor may, at its discretion, provide guidance outside the scope of this policy, but is not obligated
-  to do so.
+  Support is provided asynchronously via email. Active subscribers may submit support requests to:
+</p>
+<p>
+  <strong>Email:</strong> support@hofsetr.cloud
+</p>
+<p>
+  Support is available Monday through Friday during standard US business hours, excluding national holidays. 
+  Target initial response time is <strong>1 to 2 business days</strong>. Target response times are goals rather than 
+  guaranteed Service Level Agreements (SLAs).
 </p>
 
-<h2>3. Support Channels</h2>
+<h2>4. Customer Responsibilities & Prerequisites</h2>
 <p>
-  Support is provided primarily through email. Customers may contact Licensor at:
-</p>
-<p>
-  <strong>Email:</strong> [Insert Support Email]
-</p>
-<p>
-  Typical response times are one to two business days. Response times may vary depending on support volume,
-  issue complexity, or availability. Support is generally available Monday through Friday during normal
-  business hours.
-</p>
-
-<h2>4. Customer Responsibilities</h2>
-<p>
-  To receive effective support, customers are responsible for:
+  To receive support, customers must:
 </p>
 <ul>
-  <li>maintaining a functioning environment for the Software, including Docker and Docker Compose;</li>
-  <li>ensuring Cognos Analytics is properly licensed, configured, and operational;</li>
-  <li>securing their own systems, networks, and access credentials;</li>
-  <li>providing accurate descriptions of issues encountered;</li>
-  <li>supplying logs, screenshots, configuration details, or reproduction steps when requested;</li>
-  <li>ensuring that any shared information does not contain sensitive or confidential data.</li>
+  <li>maintain a fully functioning deployment environment, including supported Docker Engine and Docker Compose versions;</li>
+  <li>ensure the target IBM Cognos Analytics environment is reachable, operational, and properly licensed;</li>
+  <li>attempt to reproduce the issue using the comprehensive deployment guide and in-app help system prior to submitting a ticket;</li>
+  <li>supply container execution logs, configuration files (sanitized of secrets), and clear reproduction steps upon request;</li>
+  <li>ensure no sensitive, confidential, or proprietary data is included in support logs or ticket attachments.</li>
 </ul>
 
 <h2>5. No Production Load Testing</h2>
 <p>
-  The Software is not intended for use against production systems. Licensor strongly advises Licensee not
-  to run load tests against any production environment. Load testing may cause service degradation,
-  performance issues, or outages.
+  The Software is designed for pre-production, staging, and sandbox validation. Licensor strongly advises against 
+  running load tests against production systems. Executing load tests against a production environment may cause service 
+  degradation, dispatcher failure, memory exhaustion, or unexpected outages.
 </p>
 <p>
-  If Licensee chooses to run load tests against a production system, Licensee does so entirely at its own
-  risk. Licensor is not responsible for any downtime, data loss, service disruption, financial loss, or
-  other damages resulting from such use. Licensor does not provide support for issues arising from load
-  testing performed against production environments.
-</p>
-
-<h2>6. Information Licensor May Request</h2>
-<p>
-  To diagnose and resolve issues, Licensor may request:
-</p>
-<ul>
-  <li>error messages or log excerpts;</li>
-  <li>screenshots of relevant behavior;</li>
-  <li>details about the environment, including Software version and configuration;</li>
-  <li>steps to reproduce the issue;</li>
-  <li>copies of non-sensitive configuration files.</li>
-</ul>
-<p>
-  Customers provide such information voluntarily. Licensor does not require access to customer systems.
+  If Licensee chooses to run load tests against a production environment, Licensee does so entirely at its own risk. 
+  Licensor shall have zero liability for downtime, performance loss, or operational disruption, and Licensor reserves 
+  the right to decline support for issues arising directly from production load testing.
 </p>
 
-<h2>7. Updates and Maintenance</h2>
+<h2>6. Version Lifecycle & Upgrade Policy</h2>
 <p>
-  Licensor may, at its discretion, provide updates, enhancements, or patches to the Software. Nothing in
-  this Support Policy obligates Licensor to provide future updates or ongoing maintenance.
-</p>
-<p>
-  Customers are responsible for downloading and deploying updated versions of the Software when available.
+  Support is provided strictly for the <strong>current major/minor release</strong> (or the immediately preceding minor version) 
+  of the SimpliLoad container image. If an issue is reported on an outdated image version, Licensor’s primary resolution 
+  step will be asking the customer to pull and deploy the latest release tag from the official container registry (`ghcr.io`).
 </p>
 
-<h2>8. Support for Deprecated Versions</h2>
+<h2>7. Maintenance and Bug Fixes</h2>
 <p>
-  Licensor may limit or discontinue support for older versions of the Software. Customers may be asked to
-  upgrade to a more recent version as part of the troubleshooting process.
+  During an active subscription term, Licensor will make reasonable efforts to resolve verified bugs or security vulnerabilities 
+  in the Software. Fixes, security patches, and minor enhancements will be delivered via updated container image releases published 
+  to the official registry. Customers are responsible for pulling and updating their local Docker Compose deployment.
 </p>
 
-<h2>9. Contact Information</h2>
+<h2>8. Contact Information</h2>
 <p>
-  For support inquiries or questions about this Support Policy, contact:
+  For support inquiries, contact:
 </p>
 <p>
   <strong>Hofstetter Computer Consulting LLC</strong><br>
   Email: support@hofsetr.cloud<br>
   Website: <a href="https://hofstetr.github.io">https://hofstetr.github.io</a>
-</p>
-
-<h2>10. Changes to This Support Policy</h2>
-<p>
-  Licensor may update this Support Policy from time to time. Updated versions will be posted on Licensor's
-  website. Continued use of the Software after an update becomes effective constitutes acceptance of the
-  revised Support Policy.
 </p>
 
 </body>
