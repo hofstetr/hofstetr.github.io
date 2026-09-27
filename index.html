@@ -235,9 +235,15 @@
             </div>
 
             <div class="checksum-info">
-                <strong>Getting Started:</strong> Extract the archive and open the included <em>SimpliLoad Deployment Guide.pdf</em> for step-by-step instructions on configuring environment variables and launching the trial containers.
+                <p><strong>Verify File Integrity:</strong> Download both files to the same directory and run the command for your OS:</p>
+                <ul>
+                    <li><strong>Windows (PowerShell):</strong> <code>Get-FileHash simpliload-trial.zip -Algorithm SHA256</code></li>
+                    <li><strong>Linux / macOS:</strong> <code>sha256sum -c simpliload-trial.zip.sha256</code></li>
+                </ul>
+                <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Getting Started:</strong> Once verified, extract the archive and open the included <em>SimpliLoad Deployment Guide.pdf</em> for step-by-step setup instructions.</p>
             </div>
         </section>
+
 
         <section class="contact">
             <h3>Connect with Us</h3>
