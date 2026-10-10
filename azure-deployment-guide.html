@@ -236,7 +236,7 @@ docker compose up -d
 <ul>
   <li>Insufficient ASGI worker threads for concurrent workloads.</li>
   <li>Long-running Cognos reports exceeding the timeout limit.</li>
-  <li>High CPU usage on the VM.</li>
+  <li>High CPU usage on Cognos or the SimpliLoad VM.</li>
   <li>Network latency between Azure and Cognos.</li>
 </ul>
 
@@ -244,7 +244,7 @@ docker compose up -d
 <ul>
   <li>Edit <code>.env</code> on the VM and increase <code>ASGI_THREADS</code>, then run <code>docker compose up -d</code> to apply changes.</li>
   <li>Raise <code>SIMPLILOAD_RUN_TIMEOUT_SECONDS</code> in <code>.env</code> for complex reports and restart the stack.</li>
-  <li>Review Cognos server performance and dispatcher load.</li>
+  <li>Review Cognos server performance and dispatcher load, and consider resizing the SimpliLoad VM if CPU saturation is observed.</li>
   <li>Ensure the VM is deployed in a region or network topology that minimizes latency to Cognos.</li>
 </ul>
 
@@ -253,39 +253,67 @@ docker compose up -d
 <h3>Container Startup Errors</h3>
 <p><strong>Common Causes:</strong></p>
 <ul>
-  <li>Missing required environment variables in <code>.env</code>.</li>
-  <li>Incorrect file paths for certificates or secrets.</li>
-  <li>PostgreSQL container failed to initialize due to invalid credentials.</li>
+  <li>Uploaded certificates are invalid or not in a supported format.</li>
+  <li>PostgreSQL container failed to initialize due to invalid credentials or disk issues.</li>
   <li>Volume permissions preventing PostgreSQL from writing data.</li>
 </ul>
 
 <p><strong>Fixes:</strong></p>
 <ul>
-  <li>Verify all required variables are present and correctly set in <code>.env</code> on the VM.</li>
-  <li>Confirm certificate paths exist and are readable by Docker.</li>
-  <li>Ensure database credentials in <code>.env</code> match the expected values.</li>
-  <li>Check filesystem permissions for the PostgreSQL volume.</li>
+  <li>Verify that uploaded certificates are valid PEM files and were accepted during deployment.</li>
+  <li>Ensure database credentials in <code>.env</code> have not been modified after deployment.</li>
+  <li>Check filesystem permissions and confirm the VM’s OS disk is healthy and writable.</li>
 </ul>
 
 <br>
 
-<h3>How to Read SimpliLoad Logs</h3>
+<h3>Important File Locations</h3>
 <p>
-  Container names in Azure follow the same pattern as other deployments. To determine the exact
-  container names, run:
-</p>
-
-<pre><code>docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"</code></pre>
-
-<p>
-  A typical deployment will produce containers similar to:
+  The SimpliLoad VM stores all configuration files, certificates, and Docker resources under a
+  single directory. These files are useful when troubleshooting, enabling DEBUG logging, or
+  verifying certificate installation.
 </p>
 
 <ul>
-  <li><code>simpliload-web-1</code> — Django application, ASGI server, Cognos REST client</li>
-  <li><code>simpliload-nginx-1</code> — HTTPS termination and reverse proxy</li>
-  <li><code>simpliload-db-1</code> — PostgreSQL database</li>
+  <li>
+    <strong>Application Directory:</strong>
+    <pre><code>/opt/simpliload/</code></pre>
+    Contains the Docker Compose stack, environment file, certificates, and support scripts.
+  </li>
+
+  <li>
+    <strong>Environment File:</strong>
+    <pre><code>/opt/simpliload/.env</code></pre>
+    Stores all runtime configuration values, including Cognos settings, ASGI thread counts,
+    timeout values, and logging level.
+  </li>
+
+  <li>
+    <strong>Certificates:</strong>
+    <pre><code>/opt/simpliload/certs/</code></pre>
+    Contains the HTTPS certificate and key used by NGINX, as well as any Cognos CA certificate
+    uploaded during deployment.
+  </li>
+
+  <li>
+    <strong>Docker Compose File:</strong>
+    <pre><code>/opt/simpliload/docker-compose.yml</code></pre>
+    Defines the SimpliLoad services (web, nginx, db) and their configuration.
+  </li>
+
+  <li>
+    <strong>Log Files (via Docker):</strong>
+    <pre><code>docker compose logs -f simpliload-web-1
+docker compose logs -f simpliload-nginx-1
+docker compose logs -f simpliload-db-1</code></pre>
+    Logs are streamed from containers rather than stored as files.
+  </li>
 </ul>
+
+<p>
+  These locations are consistent across all Azure plans and do not change when resizing the VM or
+  updating SimpliLoad.
+</p>
 
 <p>
   Once you identify the correct container names, use the following commands to view logs:
