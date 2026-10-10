@@ -8,12 +8,15 @@
 </head>
 <body>
 
-<h1>SimpliLoad Azure Deployment Guide</h1>
+<h1 style="text-align:center; margin-bottom:0.5rem;">SimpliLoad Azure Deployment Guide</h1>
+<hr style="margin-bottom:2rem;">
 
 <h2>Overview</h2>
 <p>
-SimpliLoad is a lightweight, Docker-based utility that enables IBM Cognos Analytics users to run reports through the REST API using a clean, modern interface. This guide explains how to deploy SimpliLoad using the Azure Marketplace offering, including VM provisioning, configuration, access, and connectivity to Cognos Analytics.
+<strong>SimpliLoad</strong> is a lightweight, Docker-based utility that enables IBM Cognos Analytics users to run reports through the REST API using a clean, modern interface. This guide explains how to deploy SimpliLoad using the Azure Marketplace offering, including VM provisioning, configuration, access, and connectivity to Cognos Analytics.
 </p>
+
+<br>
 
 <h2>Prerequisites</h2>
 
@@ -35,6 +38,8 @@ SimpliLoad requires <strong>IBM Cognos Analytics 12.1.3 or later</strong>. Earli
   <li>Ability to configure firewall rules if Cognos is hosted on-prem or behind a VPN</li>
 </ul>
 
+<br>
+
 <h2>Deployment Steps in Azure Portal</h2>
 
 <h3>1. Start the Deployment</h3>
@@ -55,9 +60,11 @@ Open the Azure Marketplace listing for SimpliLoad, select the desired plan, and 
 
 <h4>VM Size</h4>
 <ul>
-  <li><strong>Trial Plan:</strong> D2s_v4 only</li>
-  <li><strong>Single and Unlimited Plans:</strong> D2s_v4, D4s_v4, or D8s_v4</li>
+  <li><strong>Trial Plan:</strong> D2s_v3 only</li>
+  <li><strong>Single and Unlimited Plans:</strong> D2s_v3, D4s_v3, or D8s_v3</li>
 </ul>
+
+<br>
 
 <h3>3. TLS Certificate Options</h3>
 
@@ -70,6 +77,8 @@ If your organization requires certificates signed by an internal or enterprise C
 <p>
 If no certificate is provided, SimpliLoad automatically generates a self-signed certificate. Browsers may display a warning until the certificate is trusted locally.
 </p>
+
+<br>
 
 <h3>4. Networking</h3>
 <p>Configure networking options:</p>
@@ -85,25 +94,31 @@ If no certificate is provided, SimpliLoad automatically generates a self-signed 
   </li>
 </ul>
 
+<br>
+
 <h3>5. Review + Create</h3>
 <p>
 Azure will validate your configuration. Click <strong>Create</strong> to begin deployment.
 </p>
 
+<br>
+
 <h2>Post-Deployment Steps</h2>
 
 <h3>Accessing SimpliLoad</h3>
 <p>
-SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM's <strong>hostname</strong> is automatically added to ALLOWED_HOSTS. The <strong>public IP address is not added by default</strong>, so accessing SimpliLoad using the raw IP will be rejected unless you explicitly allow it.
+SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM’s <strong>hostname</strong> is automatically added to ALLOWED_HOSTS. The <strong>public IP address is not added by default</strong>, so accessing SimpliLoad using the raw IP will be rejected unless you explicitly allow it.
 </p>
 
 <p>
 If your organization prefers to access SimpliLoad using the public IP, you may add it manually using the <strong>Optional Additional Allowed Hosts</strong> parameter during deployment.
 </p>
 
-<p>Most customers will access SimpliLoad using the fully qualified hostname shown in the VM's Overview page, for example:</p>
+<p>Most customers will access SimpliLoad using the fully qualified hostname shown in the VM’s Overview page, for example:</p>
 
 <pre><code>https://simpliload-prod.eastus.cloudapp.azure.com/</code></pre>
+
+<br>
 
 <h3>Logging Into the VM (Optional)</h3>
 <p>SSH access is available if needed:</p>
@@ -113,6 +128,8 @@ If your organization prefers to access SimpliLoad using the public IP, you may a
 <p>Docker containers are located under:</p>
 
 <pre><code>/opt/simpliload/</code></pre>
+
+<br>
 
 <h2>Connecting to Cognos</h2>
 <p>
@@ -129,12 +146,16 @@ All Cognos configuration is performed inside the SimpliLoad UI.
 Click <strong>Test</strong> to verify connectivity. No additional credentials or namespace fields are required.
 </p>
 
+<br>
+
 <h2>Updating SimpliLoad</h2>
 <p>To update SimpliLoad:</p>
 
 <pre><code>docker compose pull
 docker compose up -d
 </code></pre>
+
+<br>
 
 <h2>Troubleshooting</h2>
 
@@ -159,6 +180,8 @@ docker compose up -d
 docker logs simpliload
 </code></pre>
 
+<br>
+
 <h2>Support</h2>
 <p>
 For assistance, contact:<br>
@@ -174,6 +197,8 @@ Include:
   <li>Cognos version</li>
   <li>Error messages or logs</li>
 </ul>
+
+<br><br>
 
 </body>
 </html>
