@@ -319,16 +319,6 @@ docker compose logs -f simpliload-db-1</code></pre>
   Once you identify the correct container names, use the following commands to view logs:
 </p>
 
-<pre><code># Application logs (Django, ASGI, Cognos REST calls)
-docker compose logs -f simpliload-web-1
-
-# NGINX logs (HTTPS routing, certificate issues)
-docker compose logs -f simpliload-nginx-1
-
-# PostgreSQL logs (database initialization, storage issues)
-docker compose logs -f simpliload-db-1
-</code></pre>
-
 <p><strong>Recommended Diagnostic Workflow:</strong></p>
 <ol>
   <li>Start with <code>docker compose logs -f simpliload-web-1</code> to identify application-level errors.</li>
