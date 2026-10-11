@@ -2,21 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Azure deployment guide for SimpliLoad, including VM setup, certificate options, access instructions, and Cognos REST API configuration.">
 <meta name="keywords" content="SimpliLoad, Azure deployment, IBM Cognos Analytics, Cognos REST API, Docker, TLS certificates, Azure VM, cloud deployment, load testing utility">
 <title>SimpliLoad Azure Deployment Guide</title>
+<style>
+  :root {
+    --primary-color: #0067b8;
+    --text-color: #24292e;
+    --bg-color: #fdfdfd;
+    --code-bg: #f6f8fa;
+    --border-color: #e1e4e8;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 0.2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.3rem;
+    margin-top: 2.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  h4 {
+    font-size: 1.05rem;
+    margin-top: 1.2rem;
+  }
+  p, li {
+    font-size: 1rem;
+  }
+  ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  li {
+    margin-bottom: 0.4rem;
+  }
+  pre {
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+  }
+  code {
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+  }
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  blockquote {
+    border-left: 4px solid var(--primary-color);
+    background-color: #f1f8fc;
+    margin: 1rem 0;
+    padding: 0.8rem 1rem;
+    border-radius: 0 4px 4px 0;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 2rem 0;
+  }
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #586069;
+    margin-top: 3rem;
+  }
+</style>
 </head>
 <body>
 
-<h1 style="text-align:center; margin-bottom:0.5rem;">SimpliLoad Azure Deployment Guide</h1>
-<hr style="margin-bottom:2rem;">
+<h1>SimpliLoad Azure Deployment Guide</h1>
+<hr>
 
 <h2>Overview</h2>
 <p>
 <strong>SimpliLoad</strong> is a lightweight, Docker-based utility that enables IBM Cognos Analytics users to run reports through the REST API using a clean, modern interface. This guide explains how to deploy SimpliLoad using the Azure Marketplace offering, including VM provisioning, configuration, access, and connectivity to Cognos Analytics.
 </p>
-
-<br>
 
 <h2>Prerequisites</h2>
 
@@ -27,18 +113,16 @@ SimpliLoad requires <strong>IBM Cognos Analytics 12.1.3 or later</strong>. Earli
 
 <h3>Azure Requirements</h3>
 <ul>
-  <li>An active Azure subscription</li>
-  <li>Permission to create virtual machines, networking resources, and public IP addresses</li>
+  <li>An active Azure subscription.</li>
+  <li>Permission to create virtual machines, networking resources, and public IP addresses.</li>
 </ul>
 
 <h3>User Requirements</h3>
 <ul>
-  <li>Cognos REST API URL</li>
-  <li>Cognos API key</li>
-  <li>Ability to configure firewall rules if Cognos is hosted on-prem or behind a VPN</li>
+  <li>Cognos REST API URL.</li>
+  <li>Cognos API key.</li>
+  <li>Ability to configure firewall rules if Cognos is hosted on-premise or behind a VPN.</li>
 </ul>
-
-<br>
 
 <h2>Deployment Steps in Azure Portal</h2>
 
@@ -64,8 +148,6 @@ Open the Azure Marketplace listing for SimpliLoad, select the desired plan, and 
   <li><strong>Single and Unlimited Plans:</strong> D2s_v4, D4s_v4, or D8s_v4</li>
 </ul>
 
-<br>
-
 <h3>3. TLS Certificate Options</h3>
 
 <h4>Organization-Provided Certificate</h4>
@@ -77,8 +159,6 @@ If your organization requires certificates signed by an internal or enterprise C
 <p>
 If no certificate is provided, SimpliLoad automatically generates a self-signed certificate. Browsers may display a warning until the certificate is trusted locally.
 </p>
-
-<br>
 
 <h3>4. Networking</h3>
 <p>Configure networking options:</p>
@@ -94,20 +174,16 @@ If no certificate is provided, SimpliLoad automatically generates a self-signed 
   </li>
 </ul>
 
-<br>
-
 <h3>5. Review + Create</h3>
 <p>
 Azure will validate your configuration. Click <strong>Create</strong> to begin deployment.
 </p>
 
-<br>
-
 <h2>Post-Deployment Steps</h2>
 
 <h3>Accessing SimpliLoad</h3>
 <p>
-SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM’s <strong>hostname</strong> is automatically added to ALLOWED_HOSTS. The <strong>public IP address is not added by default</strong>, so accessing SimpliLoad using the raw IP will be rejected unless you explicitly allow it.
+SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM’s <strong>hostname</strong> is automatically added to <code>ALLOWED_HOSTS</code>. The <strong>public IP address is not added by default</strong>, so accessing SimpliLoad using the raw IP will be rejected unless you explicitly allow it.
 </p>
 
 <p>
@@ -118,8 +194,6 @@ If your organization prefers to access SimpliLoad using the public IP, you may a
 
 <pre><code>https://simpliload-prod.eastus.cloudapp.azure.com/</code></pre>
 
-<br>
-
 <h3>Logging Into the VM (Optional)</h3>
 <p>SSH access is available if needed:</p>
 
@@ -128,8 +202,6 @@ If your organization prefers to access SimpliLoad using the public IP, you may a
 <p>Docker containers are located under:</p>
 
 <pre><code>/opt/simpliload/</code></pre>
-
-<br>
 
 <h2>Connecting to Cognos</h2>
 <p>
@@ -146,25 +218,16 @@ All Cognos configuration is performed inside the SimpliLoad UI.
 Click <strong>Test</strong> to verify connectivity.
 </p>
 
-<br>
-
 <h2>Updating SimpliLoad</h2>
 <p>To update SimpliLoad:</p>
 
 <pre><code>docker compose pull
-docker compose up -d
-</code></pre>
-
-<br>
+docker compose up -d</code></pre>
 
 <h2>Troubleshooting</h2>
 <p>
-  This section provides practical guidance for diagnosing and resolving common issues encountered
-  during deployment or operation in Azure. Each item includes likely causes, recommended fixes, and
-  steps for reviewing logs inside the SimpliLoad VM.
+  This section provides practical guidance for diagnosing and resolving common issues encountered during deployment or operation in Azure. Each item includes likely causes, recommended fixes, and steps for reviewing logs inside the SimpliLoad VM.
 </p>
-
-<br>
 
 <h3>Invalid Certificate Errors</h3>
 <p><strong>Common Causes:</strong></p>
@@ -183,8 +246,6 @@ docker compose up -d
   <li>Check file permissions for the installed certificate and key inside the VM.</li>
 </ul>
 
-<br>
-
 <h3>Connection Failures to Cognos</h3>
 <p><strong>Common Causes:</strong></p>
 <ul>
@@ -201,8 +262,6 @@ docker compose up -d
   <li>Update the Cognos REST API URL in the Settings page to match the actual hostname and port.</li>
   <li>If Cognos is only available over HTTP and your organization accepts that risk, set <code>COGNOS_ALLOW_HTTP=true</code> in <code>.env</code> and restart the stack.</li>
 </ul>
-
-<br>
 
 <h3>Authentication Issues</h3>
 <p><strong>Common Causes:</strong></p>
@@ -225,11 +284,8 @@ docker compose up -d
 </ul>
 
 <blockquote>
-  <strong>Important:</strong> If an API key is locked, expired, or deleted in Cognos Analytics, it cannot
-  be recovered. A new key must be generated and updated in the SimpliLoad Settings page.
+  <strong>Important:</strong> If an API key is locked, expired, or deleted in Cognos Analytics, it cannot be recovered. A new key must be generated and updated in the SimpliLoad Settings page.
 </blockquote>
-
-<br>
 
 <h3>Slow or Stalled Report Execution</h3>
 <p><strong>Common Causes:</strong></p>
@@ -248,8 +304,6 @@ docker compose up -d
   <li>Ensure the VM is deployed in a region or network topology that minimizes latency to Cognos.</li>
 </ul>
 
-<br>
-
 <h3>Container Startup Errors</h3>
 <p><strong>Common Causes:</strong></p>
 <ul>
@@ -265,42 +319,32 @@ docker compose up -d
   <li>Check filesystem permissions and confirm the VM’s OS disk is healthy and writable.</li>
 </ul>
 
-<br>
-
 <h3>Important File Locations</h3>
 <p>
-  The SimpliLoad VM stores all configuration files, certificates, and Docker resources under a
-  single directory. These files are useful when troubleshooting, enabling DEBUG logging, or
-  verifying certificate installation.
+  The SimpliLoad VM stores all configuration files, certificates, and Docker resources under a single directory. These files are useful when troubleshooting, enabling DEBUG logging, or verifying certificate installation.
 </p>
 
 <ul>
   <li>
-    <strong>Application Directory:</strong>
-    <pre><code>/opt/simpliload/</code></pre>
+    <strong>Application Directory:</strong><br>
+    <code>/opt/simpliload/</code><br>
     Contains the Docker Compose stack, environment file, certificates, and support scripts.
   </li>
-
   <li>
-    <strong>Environment File:</strong>
-    <pre><code>/opt/simpliload/.env</code></pre>
-    Stores all runtime configuration values, including Cognos settings, ASGI thread counts,
-    timeout values, and logging level.
+    <strong>Environment File:</strong><br>
+    <code>/opt/simpliload/.env</code><br>
+    Stores all runtime configuration values, including Cognos settings, ASGI thread counts, timeout values, and logging level.
   </li>
-
   <li>
-    <strong>Certificates:</strong>
-    <pre><code>/opt/simpliload/certs/</code></pre>
-    Contains the HTTPS certificate and key used by NGINX, as well as any Cognos CA certificate
-    uploaded during deployment.
+    <strong>Certificates:</strong><br>
+    <code>/opt/simpliload/certs/</code><br>
+    Contains the HTTPS certificate and key used by NGINX, as well as any Cognos CA certificate uploaded during deployment.
   </li>
-
   <li>
-    <strong>Docker Compose File:</strong>
-    <pre><code>/opt/simpliload/docker-compose.yml</code></pre>
+    <strong>Docker Compose File:</strong><br>
+    <code>/opt/simpliload/docker-compose.yml</code><br>
     Defines the SimpliLoad services (web, nginx, db) and their configuration.
   </li>
-
   <li>
     <strong>Log Files (via Docker):</strong>
     <pre><code>docker compose logs -f simpliload-web-1
@@ -311,8 +355,7 @@ docker compose logs -f simpliload-db-1</code></pre>
 </ul>
 
 <p>
-  These locations are consistent across all Azure plans and do not change when resizing the VM or
-  updating SimpliLoad.
+  These locations are consistent across all Azure plans and do not change when resizing the VM or updating SimpliLoad.
 </p>
 
 <p><strong>Recommended Diagnostic Workflow:</strong></p>
@@ -324,16 +367,12 @@ docker compose logs -f simpliload-db-1</code></pre>
 </ol>
 
 <blockquote>
-  <strong>Note:</strong> Always return <code>LOG_LEVEL</code> to <code>INFO</code> after troubleshooting
-  to avoid excessive log output.
+  <strong>Note:</strong> Always return <code>LOG_LEVEL</code> to <code>INFO</code> after troubleshooting to avoid excessive log output.
 </blockquote>
 
-<br><br>
-
-<hr>
-<p style="text-align:center; font-size:0.85rem; color:#555;">
-© 2026 Hofstetter Computer Consulting LLC
-</p>
+<footer>
+  &copy; 2026 Hofstetter Computer Consulting LLC
+</footer>
 
 </body>
 </html>
