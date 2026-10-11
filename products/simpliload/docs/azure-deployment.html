@@ -189,14 +189,14 @@ Azure runs a final automated validation check against your parameter inputs. Onc
 
 <h3>Accessing SimpliLoad</h3>
 <p>
-SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM’s <strong>hostname</strong> is automatically added to <code>ALLOWED_HOSTS</code>. The <strong>public IP address is not added by default</strong>, so accessing SimpliLoad using the raw IP will be rejected unless you explicitly allow it.
+SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM's <strong>hostname</strong> is automatically added to <code>ALLOWED_HOSTS</code>. The <strong>public IP address is not added by default</strong>, so accessing SimpliLoad using the raw IP will be rejected unless you explicitly allow it.
 </p>
 
 <p>
 If your organization prefers to access SimpliLoad using the public IP, you may add it manually using the <strong>Optional Additional Allowed Hosts</strong> parameter during deployment.
 </p>
 
-<p>Most customers will access SimpliLoad using the fully qualified hostname shown in the VM’s Overview page, for example:</p>
+<p>Most customers will access SimpliLoad using the fully qualified hostname shown in the VM's Overview page, for example:</p>
 
 <pre><code>https://simpliload-prod.eastus.cloudapp.azure.com/</code></pre>
 
@@ -322,7 +322,7 @@ docker compose up -d</code></pre>
 <ul>
   <li>Verify that uploaded certificates are valid PEM files and were accepted during deployment.</li>
   <li>Ensure database credentials in <code>.env</code> have not been modified after deployment.</li>
-  <li>Check filesystem permissions and confirm the VM’s OS disk is healthy and writable.</li>
+  <li>Check filesystem permissions and confirm the VM's OS disk is healthy and writable.</li>
 </ul>
 
 <h3>Important File Locations</h3>
