@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hofstetter Computer Consulting provides enterprise software tools, consulting, and practical technology solutions for businesses.">
+    <meta name="keywords" content="Hofstetter Computer Consulting, enterprise tools, business software, technology consulting, enterprise solutions, software consulting">
     <title>Hofstetter Computer Consulting - Enterprise Tools</title>
     <style>
         :root {
@@ -139,6 +141,13 @@
             border-radius: 4px;
             border: 1px solid var(--border-color);
         }
+        .checksum-info .getting-started {
+            margin-top: 0.75rem;
+            margin-bottom: 0;
+        }
+        .trial-card .production-deployment {
+            margin-top: 1rem;
+        }
 
         /* Contact */
         .contact {
@@ -147,6 +156,11 @@
             border: 1px solid var(--border-color);
             padding: 2rem;
             border-radius: 8px;
+        }
+        .contact .official-contact {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #6f6f6f;
         }
         .btn {
             display: inline-block;
@@ -233,8 +247,8 @@
             <p>Download the official SimpliLoad Trial Bundle containing everything required to launch a local evaluation environment, including the Docker Compose configuration, deployment documentation, EULA, and support policy.</p>
             
             <div class="download-actions">
-                <a href="downloads/simpliload.zip" class="btn">Download Trial Bundle (.zip)</a>
-                <a href="downloads/simpliload.zip.sha256" class="btn btn-secondary" target="_blank" rel="noopener">SHA256 Checksum</a>
+                <a href="products/SimpliLoad/downloads/simpliload.zip" class="btn">Download Trial Bundle (.zip)</a>
+                <a href="products/SimpliLoad/downloads/simpliload.zip.sha256" class="btn btn-secondary" target="_blank" rel="noopener">SHA256 Checksum</a>
             </div>
 
             <div class="checksum-info">
@@ -243,22 +257,21 @@
                     <li><strong>Windows (PowerShell):</strong> <code>Get-FileHash simpliload.zip -Algorithm SHA256</code></li>
                     <li><strong>Linux / macOS:</strong> <code>sha256sum -c simpliload.zip.sha256</code></li>
                 </ul>
-                <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Getting Started:</strong> Once verified, extract the archive and open the included <em>SimpliLoad Deployment Guide.pdf</em> for step-by-step setup instructions.</p>
+                <p class="getting-started"><strong>Getting Started:</strong> Once verified, extract the archive and open the included <em>SimpliLoad Deployment Guide.pdf</em> for step-by-step setup instructions.</p>
             </div>
-            <p style="margin-top: 1rem;"><strong>Ready for production?</strong> Deploy SimpliLoad through the Azure Marketplace. See the <a href="products/SimpliLoad/downloads/azure-deployment.html">Azure Deployment Guide</a>.</p>
+            <p class="production-deployment"><strong>Ready for production?</strong> Deploy SimpliLoad through the Azure Marketplace. See the <a href="products/SimpliLoad/downloads/azure-deployment.html">Azure Deployment Guide</a>.</p>
         </section>
-
 
         <section class="contact">
             <h3>Connect with Us</h3>
             <p>Interested in a demo, technical evaluation, or partner inquiries? Reach out to our team directly.</p>
             <a href="mailto:sales@hofstetr.cloud" class="btn">Contact via Email</a>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: #6f6f6f;">Official Contact: sales@hofstetr.cloud</p>
+            <p class="official-contact">Official Contact: sales@hofstetr.cloud</p>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2026 Hofstetter Computer Consulting LLC, All rights reserved. IBM and Cognos are trademarks of International Business Machines Corporation.</p>
+        <p>© 2026 Hofstetter Computer Consulting LLC, All rights reserved. IBM and Cognos are trademarks of International Business Machines Corporation.</p>
     </footer>
 
 </body>
