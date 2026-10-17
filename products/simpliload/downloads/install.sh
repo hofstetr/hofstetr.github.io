@@ -36,7 +36,7 @@ rm "$BASE_DIR/simpliload.zip"
 echo "== Generating secrets =="
 
 djangoSecretKey="$(openssl rand -hex 32)"
-masterKey="$(openssl rand -hex 32)"
+masterKey="$(python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())")"
 postgresPassword="$(openssl rand -hex 16)"
 
 echo "== Computing ASGI_THREADS from VM size =="
