@@ -91,13 +91,15 @@ sslKeyHostPath="./deploy/certs/server.key"
 
 echo "== Handling Cognos CA cert (optional) =="
 
-cognosCertHostPath=""
+touch "$CERT_DIR/cognos.pem"
+chmod 644 "$CERT_DIR/cognos.pem"
+
 if is_valid_b64 "$cognosCertB64"; then
   echo "Decoding provided Cognos CA certificate..."
   echo "$cognosCertB64" | base64 -d > "$CERT_DIR/cognos.pem"
-  chmod 644 "$CERT_DIR/cognos.pem"
-  cognosCertHostPath="./deploy/certs/cognos.pem"
 fi
+
+cognosCertHostPath="./deploy/certs/cognos.pem"
 
 echo "== Building CSRF_TRUSTED_ORIGINS from ALLOWED_HOSTS =="
 
