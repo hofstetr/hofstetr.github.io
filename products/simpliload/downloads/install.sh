@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/env/bin bash
 set -euo pipefail
 
 # Inputs from ARM
@@ -21,7 +21,14 @@ CERT_DIR="$DEPLOY_DIR/certs"
 ENV_TEMPLATE="$DEPLOY_DIR/env.template"
 ENV_FILE="$BASE_DIR/.env"
 
+mkdir -p "$BASE_DIR"
 mkdir -p "$CERT_DIR"
+
+echo "== Downloading and extracting release bundle =="
+BUNDLE_URL="https://hofstetr.github.io/products/simpliload/downloads/simpliload.zip"
+curl -sL "$BUNDLE_URL" -o "$BASE_DIR/simpliload.zip"
+python3 -c "import zipfile; zipfile.ZipFile('$BASE_DIR/simpliload.zip', 'r').extractall('$BASE_DIR')"
+rm "$BASE_DIR/simpliload.zip"
 
 echo "== Generating secrets =="
 
@@ -138,7 +145,7 @@ echo "== Deployment complete =="
 cat <<EOF
 
 SimpliLoad (SINGLE) admin credentials:
-  URL:      https://${allowedHosts}
+  URL:       https://${allowedHosts}
   Username: ${superuserUsername}
   Email:    ${superuserEmail}
   Password: ${superuserPassword}
