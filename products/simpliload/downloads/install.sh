@@ -18,7 +18,7 @@ encodedInitialLicense="${10:-}"
 BASE_DIR="/opt/simpliload"
 DEPLOY_DIR="$BASE_DIR/deploy"
 CERT_DIR="$DEPLOY_DIR/certs"
-ENV_TEMPLATE="$DEPLOY_DIR/env.template"
+ENV_TEMPLATE="$DEPLOY_DIR/.env.template"
 ENV_FILE="$BASE_DIR/.env"
 
 mkdir -p "$BASE_DIR"
