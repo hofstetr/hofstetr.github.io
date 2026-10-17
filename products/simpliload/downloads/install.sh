@@ -1,6 +1,9 @@
 #!/usr/env/bin bash
 set -euo pipefail
 
+echo "== Waiting for cloud-init to finish =="
+cloud-init status --wait > /dev/null 2>&1 || true
+
 # Inputs from ARM
 superuserUsername="$1"
 superuserEmail="$2"
@@ -122,10 +125,6 @@ echo "== Writing initial license file =="
 echo "$encodedInitialLicense" > "$DEPLOY_DIR/license.dat"
 chmod 600 "$DEPLOY_DIR/license.dat"
 
-echo "== Writing edition metadata =="
-
-echo "single" > "$DEPLOY_DIR/edition"
-
 echo "== Installing Docker (if needed) =="
 
 if ! command -v docker >/dev/null 2>&1; then
@@ -137,14 +136,14 @@ cd "$BASE_DIR"
 echo "Pulling application images..."
 docker compose pull
 
-echo "== Starting SimpliLoad (single) =="
+echo "== Starting SimpliLoad =="
 docker compose up -d
 
 echo "== Deployment complete =="
 
 cat <<EOF
 
-SimpliLoad (SINGLE) admin credentials:
+SimpliLoad admin credentials:
   URL:       https://${allowedHosts}
   Username: ${superuserUsername}
   Email:    ${superuserEmail}
