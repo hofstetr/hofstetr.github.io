@@ -138,8 +138,8 @@ Open the Azure Marketplace listing for SimpliLoad, select your desired plan (Tri
   <li><strong>Resource Group:</strong> Choose an existing resource group or create a new dedicated one (e.g., <code>rg-simpliload-prod</code>) to keep all deployment assets grouped logically.</li>
   <li><strong>Region:</strong> Select the Azure region closest to your users or your hosted IBM Cognos Analytics environment to minimize network latency.</li>
   <li><strong>VM Name:</strong> Enter a unique identifier for the virtual machine resource (defaults to <code>simpliload</code>).</li>
-  <li><strong>Authentication Type:</strong> Choose between an <em>SSH Public Key</em> (recommended for security) or a <em>Password</em> for administrative virtual machine access.</li>
-  <li><strong>Administrator Account:</strong> Enter the administrative username for the OS (avoid generic names like root or admin). If using SSH, paste your public key string.</li>
+  <li><strong>Authentication Type:</strong> Virtual machine administrative access is configured using an <strong>RSA Public Key</strong>. Paste your RSA public key string.</li>
+  <li><strong>Administrator Account:</strong> Enter the administrative username for the OS (avoid generic names like root or admin).</li>
 </ul>
 
 <h4>VM Size</h4>
@@ -171,13 +171,11 @@ SimpliLoad automatically mounts these credentials into the NGINX reverse proxy c
 If you leave the certificate fields blank, SimpliLoad automatically generates a secure self-signed certificate upon first boot. While fully encrypted, your browser will display an initial security warning until you trust the certificate locally or replace it later.
 </p>
 
-<h3>4. Networking</h3>
-<p>Configure how SimpliLoad connects to your network infrastructure:</p>
+<h3>4. Networking &amp; Public IP</h3>
+<p>Configure networking settings for your deployment:</p>
 <ul>
-  <li><strong>Virtual Network (VNet):</strong> Select an existing VNet or allow the wizard to generate a new one. If your Cognos instance resides on an on-premise network or a peered private VNet, select the appropriate network configuration that maintains line-of-sight connectivity.</li>
-  <li><strong>Subnet:</strong> Specify the target subnet within the selected Virtual Network (defaults to <code>default</code>).</li>
-  <li><strong>Public IP New or Existing:</strong> Choose whether to provision a new static Public IP, attach an existing one, or select <code>none</code> if deploying entirely behind an internal load balancer or corporate VPN gateway.</li>
-  <li><strong>Allowed Hosts &amp; Cognos Allowed Hosts:</strong> Specify authorized hostnames or IP addresses permitted to interact with the service interface.</li>
+  <li><strong>Managed Network:</strong> SimpliLoad automatically deploys using a stock network configuration within the managed resource group, streamlining setup without requiring custom virtual network or subnet provisioning.</li>
+  <li><strong>Public IP &amp; DNS Label:</strong> If you choose to enable a public IP address, you will be prompted to provide a unique <strong>DNS label prefix</strong> to establish an Azure-managed fully qualified domain name (FQDN).</li>
 </ul>
 
 <h3>5. Review + Create</h3>
@@ -201,9 +199,13 @@ If your organization prefers to access SimpliLoad using the public IP, you may a
 <pre><code>https://simpliload-prod.eastus.cloudapp.azure.com/</code></pre>
 
 <h3>Logging Into the VM (Optional)</h3>
-<p>SSH access is available if needed:</p>
+<p>SSH access is available via RSA key authentication:</p>
 
 <pre><code>ssh &lt;admin-user&gt;@&lt;hostname&gt;</code></pre>
+
+<blockquote>
+  <strong>Security Note:</strong> Port 22 is <strong>not open by default</strong>. If you require administrative SSH access, you must configure an inbound network security group rule or access the VM through a private bastion or VPN connection.
+</blockquote>
 
 <p>Docker containers are located under:</p>
 
