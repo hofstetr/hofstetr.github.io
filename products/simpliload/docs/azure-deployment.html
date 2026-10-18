@@ -136,7 +136,8 @@ Open the Azure Marketplace listing for SimpliLoad, select your desired plan (Tri
 <ul>
   <li><strong>Subscription:</strong> Select the active Azure subscription where billing and resource ownership will be managed.</li>
   <li><strong>Resource Group:</strong> Choose an existing resource group or create a new dedicated one (e.g., <code>rg-simpliload-prod</code>) to keep all deployment assets grouped logically.</li>
-  <li><strong>Region:</strong> Select the Azure region closest to your users or your hosted IBM Cognos Analytics environment to minimize network latency.</li>
+  <li><strong>Managed Application Resource Group:</strong> Specify or accept the managed resource group name where Azure will automatically provision and isolate the underlying solution resources and stock networking components.</li>
+  <li><strong>Region:</strong> Select the Azure region closest to your users or your hosted IBM Cognos Analytics environment to minimize network latency. <em>Note: Depending on your subscription context or pre-selected scope, this prompt may be pre-populated or omitted automatically by the portal.</em></li>
   <li><strong>VM Name:</strong> Enter a unique identifier for the virtual machine resource (defaults to <code>simpliloadvm</code>).</li>
   <li><strong>Administrator Account:</strong> Enter the administrative username for logging into the virtual machine (avoid generic names like root or admin).</li>
   <li><strong>RSA Public Key:</strong> Paste your SSH RSA public key string (starting with <code>ssh-rsa</code>) for secure Linux authentication.</li>
