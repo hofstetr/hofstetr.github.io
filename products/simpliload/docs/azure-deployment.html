@@ -205,14 +205,25 @@ Azure runs a final automated validation check against your parameter inputs. Onc
 SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM's hostname and any provisioned public IP address are automatically added to <code>ALLOWED_HOSTS</code>.
 </p>
 
-<p>Most customers will access SimpliLoad using the fully qualified hostname or public IP address, for example:</p>
+<h4>Public Access</h4>
+<p>If deployed with a public IP, you can access SimpliLoad using your configured DNS label or public FQDN, for example:</p>
 
-<pre><code>https://simpliload-prod.eastus.cloudapp.azure.com/</code></pre>
+<pre><code>[https://simpliload-prod.eastus.cloudapp.azure.com/](https://simpliload-prod.eastus.cloudapp.azure.com/)</code></pre>
+
+<h4>Private / VNet-Peered Deployments</h4>
+<p>
+If you opted out of a public IP to keep SimpliLoad isolated within your network:
+</p>
+<ul>
+  <li><strong>VNet Peering:</strong> Connect your internal corporate or application Virtual Network to <code>simpliload-vnet</code> to route traffic securely over Azure’s private backbone.</li>
+  <li><strong>Private DNS:</strong> Create an entry in your Azure Private DNS Zone or corporate DNS server pointing an internal hostname directly to the VM's private IP address.</li>
+  <li><strong>Certificates:</strong> Ensure your TLS certificate covers your internal domain name or private IP to prevent browser security warnings.</li>
+</ul>
 
 <h3>Logging Into the VM (Optional)</h3>
 <p>SSH access is available via RSA key authentication:</p>
 
-<pre><code>ssh &lt;admin-user&gt;@&lt;hostname&gt;</code></pre>
+<pre><code>ssh &lt;admin-user&gt;@&lt;hostname-or-private-ip&gt;</code></pre>
 
 <blockquote>
   <strong>Security Note:</strong> Port 22 is <strong>not open by default</strong>. If you require administrative SSH access, you must configure an inbound network security group rule or access the VM through a private bastion or VPN connection.
