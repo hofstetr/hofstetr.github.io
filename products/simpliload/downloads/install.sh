@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 echo "== Waiting for cloud-init to finish =="
@@ -26,6 +26,17 @@ ENV_FILE="$BASE_DIR/.env"
 
 mkdir -p "$BASE_DIR"
 mkdir -p "$CERT_DIR"
+
+echo "== Checking for public IP address =="
+PUBLIC_IP=$(curl -s --connect-timeout 3 ifconfig.me || true)
+if [[ "$PUBLIC_IP" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "Found public IP: $PUBLIC_IP"
+    if [[ ",$allowedHosts," != *",$PUBLIC_IP,"* ]]; then
+        allowedHosts="${allowedHosts},${PUBLIC_IP}"
+    fi
+else
+    echo "No public IP detected or private-only deployment."
+fi
 
 echo "== Downloading and extracting release bundle =="
 BUNDLE_URL="https://hofstetr.github.io/products/simpliload/downloads/simpliload.zip"
@@ -76,7 +87,7 @@ else
   SAN_CONFIG="subjectAltName=DNS:localhost,DNS:$(hostname)"
 
   # Add entries from ALLOWED_HOSTS if they look like domains or IPs
-  IFS=',' read -ra HOST_ARRAY <<< "$ALLOWED_HOSTS"
+  IFS=',' read -ra HOST_ARRAY <<< "$allowedHosts"
   for host in "${HOST_ARRAY[@]}"; do
       host=$(echo "$host" | xargs) # trim whitespace
       if [[ -n "$host" && "$host" != "localhost" && "$host" != "$(hostname)" ]]; then
