@@ -72,16 +72,28 @@ if is_valid_b64 "$tlsCertB64" && is_valid_b64 "$tlsKeyB64"; then
 else
   echo "No TLS certificate provided. Generating self-signed fallback certificate..."
 
-  # Build SAN list properly
-  sanList=$(echo "$allowedHosts" | tr ',' '\n' | sed 's/^/DNS:/')
-  sanJoined=$(paste -sd, <<< "$sanList")
+  # Build OpenSSL SAN config dynamically from allowed hosts or local details
+  SAN_CONFIG="subjectAltName=DNS:localhost,DNS:$(hostname)"
+
+  # Add entries from ALLOWED_HOSTS if they look like domains or IPs
+  IFS=',' read -ra HOST_ARRAY <<< "$ALLOWED_HOSTS"
+  for host in "${HOST_ARRAY[@]}"; do
+      host=$(echo "$host" | xargs) # trim whitespace
+      if [[ -n "$host" && "$host" != "localhost" && "$host" != "$(hostname)" ]]; then
+          if [[ $host =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              SAN_CONFIG+=",IP:$host"
+          else
+              SAN_CONFIG+=",DNS:$host"
+          fi
+      fi
+  done
 
   openssl req -x509 -nodes -newkey rsa:2048 \
     -keyout "$CERT_DIR/server.key" \
     -out "$CERT_DIR/server.crt" \
     -days 365 \
-    -subj "/CN=$(echo "$allowedHosts" | cut -d',' -f1)" \
-    -addext "subjectAltName=${sanJoined}"
+    -subj "/CN=$(hostname)" \
+    -addext "$SAN_CONFIG"
 
   chmod 600 "$CERT_DIR/server.key"
 fi
