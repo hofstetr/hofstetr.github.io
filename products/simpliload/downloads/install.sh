@@ -168,12 +168,11 @@ echo "== Deployment complete =="
 
 cat <<EOF
 
-SimpliLoad admin credentials:
-  URL:       https://${allowedHosts}
-  Username: ${superuserUsername}
-  Email:    ${superuserEmail}
-  Password: ${superuserPassword}
-  VM Size:  ${vmSize}
+SimpliLoad computed values:
   ASGI_THREADS: ${asgiThreads}
+  SAN_CONFIG: ${SAN_CONFIG}
+  ALLOWED_HOSTS: ${allowedHosts}
+  CSRF_TRUSTED_ORIGINS: ${csrfTrustedOrigins}
+  COGNOS_ALLOWED_HOSTS: ${cognosAllowedHosts}
 
 EOF
