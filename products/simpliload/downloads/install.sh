@@ -136,7 +136,7 @@ sed -i "s|\${djangoSecretKey}|$djangoSecretKey|g" "$ENV_FILE"
 sed -i "s|\${masterKey}|$masterKey|g" "$ENV_FILE"
 sed -i "s|\${superuserUsername}|$superuserUsername|g" "$ENV_FILE"
 sed -i "s|\${superuserEmail}|$superuserEmail|g" "$ENV_FILE"
-sed -i "s|\${superuserPassword}|$superuserPassword|g" "$ENV_FILE"
+sed -i 's|\${superuserPassword}|'"$superuserPassword"'|g' "$ENV_FILE"
 sed -i "s|\${postgresPassword}|$postgresPassword|g" "$ENV_FILE"
 sed -i "s|\${allowedHosts}|$allowedHosts|g" "$ENV_FILE"
 sed -i "s|\${csrfTrustedOrigins}|$csrfTrustedOrigins|g" "$ENV_FILE"
@@ -170,7 +170,7 @@ cat <<EOF
 
 SimpliLoad computed values:
   ASGI_THREADS: ${asgiThreads}
-  SAN_CONFIG: ${SAN_CONFIG}
+  SAN_CONFIG: ${SAN_CONFIG:-"N/A (using provided cert)"}
   ALLOWED_HOSTS: ${allowedHosts}
   CSRF_TRUSTED_ORIGINS: ${csrfTrustedOrigins}
   COGNOS_ALLOWED_HOSTS: ${cognosAllowedHosts}
