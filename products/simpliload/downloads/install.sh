@@ -7,7 +7,7 @@ cloud-init status --wait > /dev/null 2>&1 || true
 # Inputs from ARM
 superuserUsername="$1"
 superuserEmail="$2"
-superuserPassword="$3"
+superuserPassword=$(echo "$3" | base64 -d)
 allowedHosts="$4"
 cognosAllowedHosts="$5"
 vmSize="$6"
