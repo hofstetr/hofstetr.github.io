@@ -26,6 +26,7 @@ ENV_FILE="$BASE_DIR/.env"
 
 mkdir -p "$BASE_DIR"
 mkdir -p "$CERT_DIR"
+chown -R 1000:1000 "$DEPLOY_DIR"
 
 echo "== Checking for public IP address =="
 PUBLIC_IP=$(curl -s --connect-timeout 3 ifconfig.me || true)
