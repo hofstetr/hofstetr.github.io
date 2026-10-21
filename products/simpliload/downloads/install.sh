@@ -26,7 +26,6 @@ ENV_FILE="$BASE_DIR/.env"
 
 mkdir -p "$BASE_DIR"
 mkdir -p "$CERT_DIR"
-chown -R 1000:1000 "$DEPLOY_DIR"
 
 echo "== Checking for public IP address =="
 PUBLIC_IP=$(curl -s --connect-timeout 3 ifconfig.me || true)
@@ -157,6 +156,9 @@ if ! command -v docker >/dev/null 2>&1; then
   curl -fsSL https://get.docker.com | sh
 fi
 
+chown -R 1000:1000 "$BASE_DIR"
+chmod 600 "$DEPLOY_DIR/license.dat"
+chmod 644 "$DEPLOY_DIR/nginx.conf"
 cd "$BASE_DIR"
 
 echo "Pulling application images..."
