@@ -148,7 +148,7 @@ sed -i "s|\${sslCertHostPath}|$sslCertHostPath|g" "$ENV_FILE"
 sed -i "s|\${sslKeyHostPath}|$sslKeyHostPath|g" "$ENV_FILE"
 
 echo "== Writing initial license file =="
-echo "$encodedInitialLicense" > "$DEPLOY_DIR/license.dat"
+printf "%s" "$encodedInitialLicense" > "$DEPLOY_DIR/license.dat"
 chmod 600 "$DEPLOY_DIR/license.dat"
 
 echo "== Installing Docker (if needed) =="
