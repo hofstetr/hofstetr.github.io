@@ -73,7 +73,7 @@ echo "== Handling TLS certificate =="
 # Helper function to check if base64 input contains valid content
 is_valid_b64() {
   local val="$1"
-  [ -n "$val" ] && [ "$val" != "null" ] && [ "$val" != "\"\"" ] && [ "$val" != "e30=" ]
+  [ -n "${val:-}" ] && [ "$val" != "null" ] && [ "$val" != "\"\"" ] && printf '%s' "$val" | base64 -d >/dev/null 2>&1
 }
 
 if is_valid_b64 "$tlsCertB64" && is_valid_b64 "$tlsKeyB64"; then
