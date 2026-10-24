@@ -201,24 +201,39 @@ Azure runs a final automated validation check against your parameter inputs. Onc
 
 <h2>Post-Deployment Steps</h2>
 
-<h3>Accessing SimpliLoad</h3>
+<h3>Accessing & Network Configuration</h3>
 <p>
-SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM's hostname and any provisioned public IP address are automatically added to <code>ALLOWED_HOSTS</code>.
+  SimpliLoad enforces an allowed-hosts list for security. During deployment, the VM's hostname and any provisioned public IP address are automatically added to <code>ALLOWED_HOSTS</code>.
 </p>
 
-<h4>Public Access</h4>
-<p>If deployed with a public IP, you can access SimpliLoad using your configured DNS label or public FQDN, for example:</p>
-
-<pre><code>[https://simpliload-prod.eastus.cloudapp.azure.com/](https://simpliload-prod.eastus.cloudapp.azure.com/)</code></pre>
-
-<h4>Private / VNet-Peered Deployments</h4>
+<h4>1. Inbound Access (Reaching SimpliLoad)</h4>
 <p>
-If you opted out of a public IP to keep SimpliLoad isolated within your network:
+  To reach the SimpliLoad interface, inbound traffic on <strong>Port 443 (HTTPS)</strong> or <strong>Port 80 (HTTP)</strong> must be permitted:
+</p>
+
+<ul>
+  <li><strong>Public Access:</strong> If deployed with a Public IP, ports 80 and 443 are automatically opened in the Network Security Group during deployment. You can access SimpliLoad immediately using your configured DNS label or public FQDN, for example:
+    <pre><code>https://simpliload-prod.eastus.cloudapp.azure.com/</code></pre>
+  </li>
+  <li><strong>Private / VNet-Peered Access:</strong> If deployed without a Public IP to keep SimpliLoad completely isolated within your network, ensure your internal Network Security Groups allow inbound web traffic on ports 80/443, and configure access via:
+    <ul>
+      <li><strong>VNet Peering:</strong> Connect your internal corporate or application Virtual Network to <code>simpliload-vnet</code> to route traffic over Azure’s private backbone.</li>
+      <li><strong>Private DNS:</strong> Add an entry in your Azure Private DNS Zone or corporate DNS server pointing your internal hostname to the VM's private IP.</li>
+      <li><strong>Certificates:</strong> Ensure your TLS certificate covers your internal domain name or private IP to avoid browser security warnings.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>2. Outbound Access (Connecting to Cognos)</h4>
+<p>
+  Regardless of whether SimpliLoad is deployed with a Public or Private IP, it acts as a load generator that must initiate outbound connections to your Cognos Analytics environment.
+</p>
+<p>
+  Ensure your Network Security Groups (NSGs) and corporate firewalls allow outbound traffic from the SimpliLoad VM to your Cognos server:
 </p>
 <ul>
-  <li><strong>VNet Peering:</strong> Connect your internal corporate or application Virtual Network to <code>simpliload-vnet</code> to route traffic securely over Azure’s private backbone.</li>
-  <li><strong>Private DNS:</strong> Create an entry in your Azure Private DNS Zone or corporate DNS server pointing an internal hostname directly to the VM's private IP address.</li>
-  <li><strong>Certificates:</strong> Ensure your TLS certificate covers your internal domain name or private IP to prevent browser security warnings.</li>
+  <li><strong>Port 9300:</strong> Standard for direct communication with the Cognos Dispatcher / Content Manager.</li>
+  <li><strong>Port 443 / 80:</strong> If traffic is routed through an internal web gateway, IIS, or reverse proxy.</li>
 </ul>
 
 <h3>Administrative SSH Access</h3>
