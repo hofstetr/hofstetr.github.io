@@ -222,7 +222,9 @@ If you opted out of a public IP to keep SimpliLoad isolated within your network:
 </ul>
 
 <h3>Logging Into the VM (Optional)</h3>
-<p>SSH access is available via RSA key authentication:</p>
+<p>
+  SSH access is available via RSA key authentication. If you generated your key using the default path (<code>$env:USERPROFILE\.ssh\id_rsa</code>), standard SSH clients will automatically use that key:
+</p>
 
 <pre><code>ssh &lt;admin-user&gt;@&lt;hostname-or-private-ip&gt;</code></pre>
 
