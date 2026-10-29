@@ -293,7 +293,8 @@ docker compose up -d</code></pre>
 <ul>
   <li>Verify the Cognos CA certificate exists on the VM and is valid PEM.</li>
   <li>Confirm the corresponding path in <code>.env</code> points to the correct file.</li>
-  <li>Ensure the Cognos server certificate’s CN or SAN matches the hostname used in the SimpliLoad Settings page.</li>
+  <li><strong>For Testing / Self-Signed Certs:</strong> Disable hostname verification in your <code>.env</code> configuration if self-signed defaults trigger a mismatch.</li>
+  <li><strong>For Production:</strong> Ensure the Cognos server certificate’s CN or SAN strictly matches the hostname used in the SimpliLoad Settings page.</li>
   <li>Check file permissions for the installed certificate and key inside the VM.</li>
 </ul>
 
