@@ -217,8 +217,7 @@ p {
 }
 
 .hero h1 {
-    max-width: none;
-    margin: 0 0 1.5rem 0;
+    font-size: 3rem;
 }
 
 .hero p {
