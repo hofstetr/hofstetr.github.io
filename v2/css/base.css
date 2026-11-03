@@ -110,24 +110,32 @@ p {
     font-size: 1.1rem;
 }
 
+.card h3 {
+    color: var(--blue-header);
+}
+
 .card {
-    background: white;
-
-    border: 1px solid var(--border-color);
-
-    border-radius: var(--radius-md);
-
-    padding: 2rem;
-
-    box-shadow: var(--shadow-sm);
-
-    transition: all .25s ease;
+    min-height: 250px;
 }
 
 .card:hover {
     transform: translateY(-6px);
 
     box-shadow: var(--shadow-md);
+}
+
+.product-status {
+    display: inline-block;
+
+    background: #edf5ff;
+    color: var(--primary);
+
+    padding: .35rem .75rem;
+
+    border-radius: 25px;
+
+    font-size: .85rem;
+    font-weight: 600;
 }
 
 .btn {
@@ -212,8 +220,11 @@ p {
 }
 
 .site-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
-    background: #ffffff;
 }
 
 .nav {
