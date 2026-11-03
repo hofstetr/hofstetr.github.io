@@ -183,25 +183,29 @@ p {
 .hero-layout {
     display: flex;
     align-items: center;
-    gap: 3rem;
-
-    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .hero-content {
-    flex: 1;
-    min-width: 0;
+    flex: 0 0 45%;
+}
+
+.hero-image {
+    flex: 0 0 55%;
 }
 
 .hero-image img {
     width: 100%;
-    max-width: 100%;
     height: auto;
 
     display: block;
 
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
+}
+
+.hero .container {
+    width: min(1400px, 95%);
 }
 
 .hero-kicker {
