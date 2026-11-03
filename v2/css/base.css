@@ -76,7 +76,7 @@ h4 {
 }
 
 h1 {
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
 }
 
 h2 {
@@ -97,12 +97,12 @@ p {
 }
 
 .section {
-    padding: 6rem 0;
+    padding: 4rem 0;
 }
 
 .section-header {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 700px;
+    margin: 0 auto 3rem;
     text-align: center;
 }
 
@@ -147,15 +147,10 @@ p {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     text-decoration: none;
-
     padding: 0.9rem 1.75rem;
-
     border-radius: 999px;
-
     font-weight: 600;
-
     transition: all .2s ease;
 }
 
@@ -171,7 +166,6 @@ p {
 .btn-secondary {
     background: white;
     color: var(--primary);
-
     border: 1px solid var(--primary);
 }
 
@@ -182,6 +176,8 @@ p {
             #edf5ff 0%,
             #ffffff 100%
         );
+
+    padding: 5rem 0;
 }
 
 .hero-kicker {
