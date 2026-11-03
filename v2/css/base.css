@@ -292,3 +292,46 @@ p {
 .founder-section {
     background: #edf5ff;
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-mark {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--blue-header);
+
+    color: white;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+    font-size: 1rem;
+
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-name {
+    font-weight: 700;
+    color: var(--blue-header);
+
+    line-height: 1.2;
+}
+
+.logo-tagline {
+    font-size: .8rem;
+    color: var(--text-muted);
+}
