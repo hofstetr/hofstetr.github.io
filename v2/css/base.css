@@ -177,7 +177,25 @@ p {
             #ffffff 100%
         );
 
-    padding: 5rem 0;
+    padding: 4rem 0;
+}
+
+.hero-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
 }
 
 .hero-kicker {
@@ -189,24 +207,40 @@ p {
 }
 
 .hero h1 {
-    max-width: 900px;
-    margin: 0 auto 2rem;
+    max-width: none;
+    margin: 0 0 1.5rem 0;
 }
 
 .hero p {
-    max-width: 750px;
+    max-width: none;
     margin: 0 auto;
     font-size: 1.2rem;
 }
 
 .hero-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
 
     margin-top: 2rem;
 
     flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+
+    .hero-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-image {
+        margin-top: 2rem;
+    }
 }
 
 .product-grid {
