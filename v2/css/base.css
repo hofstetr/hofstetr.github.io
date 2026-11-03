@@ -300,8 +300,8 @@ p {
 }
 
 .logo-mark {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
 
     display: flex;
     align-items: center;
@@ -311,9 +311,9 @@ p {
 
     color: white;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1rem;
 
     box-shadow: var(--shadow-sm);
