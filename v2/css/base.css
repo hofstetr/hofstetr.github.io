@@ -505,6 +505,10 @@ p {
 }
 
 .download-verification code {
+    padding: 0.2rem 0.4rem;
+    background: var(--text-primary);
+    border-radius: var(--radius-sm);
+    color: white;
     overflow-wrap: anywhere;
 }
 
