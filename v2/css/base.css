@@ -129,20 +129,6 @@ p {
     box-shadow: var(--shadow-md);
 }
 
-.product-status {
-    display: inline-block;
-
-    background: #edf5ff;
-    color: var(--primary);
-
-    padding: .35rem .75rem;
-
-    border-radius: 25px;
-
-    font-size: .85rem;
-    font-weight: 600;
-}
-
 .btn {
     display: inline-flex;
     align-items: center;
@@ -267,6 +253,14 @@ p {
     margin-top: 3rem;
 }
 
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 1rem;
+}
+
 .product-logo {
     width: 90px;
     height: auto;
@@ -274,6 +268,21 @@ p {
     display: block;
 
     margin-bottom: 1rem;
+}
+
+.product-status {
+    display: inline-block;
+
+    background: #edf5ff;
+    color: var(--primary);
+
+    padding: .35rem .75rem;
+    margin-top: 0.5rem;
+
+    border-radius: 25px;
+
+    font-size: .85rem;
+    font-weight: 600;
 }
 
 .site-header {
