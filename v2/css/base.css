@@ -315,6 +315,18 @@ p {
     border-bottom: 1px solid var(--border-color);
 }
 
+.site-footer {
+    padding: var(--space-md) 0;
+    background: var(--blue-dark);
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+    color: white;
+    font-size: 0.9rem;
+}
+
 .nav {
     display: flex;
     justify-content: space-between;
