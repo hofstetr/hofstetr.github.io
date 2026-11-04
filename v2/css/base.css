@@ -342,6 +342,76 @@ p {
     background: var(--surface);
 }
 
+.overview-section {
+    background: var(--surface-alt);
+}
+
+.overview-copy p:first-child {
+    color: var(--blue-header);
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.overview-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.capability-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.capability-grid li {
+    padding: 1.5rem;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.capability-grid h3 {
+    margin-bottom: 0.75rem;
+    color: var(--blue-header);
+    font-size: 1.15rem;
+}
+
+.capability-grid p {
+    margin: 0;
+}
+
+.compatibility-section {
+    padding: var(--space-md) 0;
+    background: var(--surface-alt);
+}
+
+.compatibility-callout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: 1.5rem 2rem;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.compatibility-callout h2 {
+    margin: 0;
+    color: var(--blue-header);
+    font-size: 1.5rem;
+}
+
+.compatibility-callout p {
+    margin: 0;
+}
+
 .founder-section {
     background: var(--surface-alt);
 }
@@ -406,6 +476,26 @@ p {
     border: 0;
 }
 
+.download-verification {
+    margin: var(--space-md) auto 0;
+    padding: var(--space-md);
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.download-verification h3 {
+    color: var(--blue-header);
+}
+
+.download-verification ul:last-child {
+    margin-bottom: 0;
+}
+
+.download-verification code {
+    overflow-wrap: anywhere;
+}
+
 .contact-hero .hero-content {
     flex: 1 1 auto;
     max-width: 760px;
@@ -425,4 +515,12 @@ p {
 
 .contact-hero .official-contact a {
     color: var(--primary);
+}
+
+@media (max-width: 600px) {
+    .compatibility-callout {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1.5rem;
+    }
 }
