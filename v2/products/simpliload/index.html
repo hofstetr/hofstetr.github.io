@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpliLoad | Hofstetter Computer Consulting</title>
+    <link rel="stylesheet" href="../../css/base.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-mark">
+                        HCC
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-name">
+                            Hofstetter Computer Consulting
+                        </div>
+                        <div class="logo-tagline">
+                            Software for Cognos Administrators
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-links">
+                    <a href="../../index.html">Home</a>
+                    <a href="../../index.html#products">Products</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-layout">
+                    <div class="hero-content">
+                        <img
+                            src="../../images/SimpliLoad_logo.webp"
+                            alt="SimpliLoad"
+                            class="product-hero-logo">
+                        <h1>
+                            Performance and Load Testing
+                            for IBM Cognos Analytics
+                        </h1>
+                        <p class="hero-description">
+                            Validate performance. Benchmark capacity.
+                            Identify bottlenecks before they impact users.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#trial-download"
+                                class="btn btn-primary">
+                                Download Trial
+                            </a>
+                            <a
+                                href="https://marketplace.microsoft.com/en-us/product/hofstetr-cloud.simpliload?tab=Overview"
+                                target="_blank"
+                                rel="noopener"
+                                class="btn btn-secondary">
+                                Azure Marketplace
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-image">
+                        <img
+                            src="../../images/SimpliLoad-Demo-Thumbnail.webp"
+                            alt="SimpliLoad Dashboard"
+                            class="product-screenshot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Overview</h2>
+                </div>
+                <div class="content-width">
+                    <p>
+                        SimpliLoad is a performance and load testing utility
+                        built specifically for IBM Cognos Analytics environments.
+                    </p>
+                    <p>
+                        It empowers BI administrators and infrastructure teams
+                        to validate server capacity, optimize environments,
+                        and confidently plan system upgrades.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>See SimpliLoad in Action</h2>
+                </div>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube.com/embed/kN_CFL-9SXI?vq=hd1080&rel=0&hd=1"
+                        title="SimpliLoad Demo"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capabilities -->
+        <section class="section products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Key Capabilities</h2>
+                </div>
+                <div class="content-width">
+                    <ul class="feature-list">
+                        <li>
+                            <strong>Azure-Managed Deployment:</strong>
+                            Runs inside your dedicated Azure VM, providing full
+                            control over network boundaries, firewall rules,
+                            and operational security.
+                        </li>
+                        <li>
+                            <strong>Enterprise Security:</strong>
+                            Supports both organization-issued TLS certificates
+                            and automatically generated self-signed certificates.
+                        </li>
+                        <li>
+                            <strong>REST API Native:</strong>
+                            Built specifically for IBM Cognos Analytics 12.1.3
+                            and later using the official REST API.
+                        </li>
+                        <li>
+                            <strong>Streamlined Configuration:</strong>
+                            Configure SimpliLoad using only your Cognos REST API
+                            URL and API key.
+                        </li>
+                        <li>
+                            <strong>Isolated Workloads:</strong>
+                            Deploy inside your own Azure subscription and keep
+                            testing activity separate from production workloads.
+                        </li>
+                        <li>
+                            <strong>Performance & Capacity Insights:</strong>
+                            Identify bottlenecks, validate infrastructure
+                            readiness, and simulate real-world Cognos workloads.
+                        </li>
+                        <li>
+                            <strong>Rapid Setup:</strong>
+                            Provision the VM, configure the connection,
+                            and begin testing within minutes.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trial Download -->
+        <section id="trial-download" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>
+                        Try SimpliLoad On-Premises
+                    </h2>
+                </div>
+                <div class="trial-card">
+                    <p>
+                        Download the official SimpliLoad Trial Bundle containing
+                        everything required to launch a local evaluation
+                        environment including Docker Compose files,
+                        deployment documentation, EULA, and support policy.
+                    </p>
+                    <div class="download-actions">
+                        <a
+                            href="downloads/simpliload.zip"
+                            class="btn btn-primary">
+                            Download Trial Bundle
+                        </a>
+                        <a
+                            href="downloads/simpliload.zip.sha256"
+                            class="btn btn-secondary"
+                            target="_blank"
+                            rel="noopener">
+                            SHA256 Checksum
+                        </a>
+                    </div>
+                    <div class="checksum-info">
+                        <p>
+                            <strong>Verify File Integrity</strong>
+                        </p>
+                        <ul>
+                            <li>
+                                <strong>Windows:</strong>
+                                <code>
+                                    Get-FileHash simpliload.zip -Algorithm SHA256
+                                </code>
+                            </li>
+                            <li>
+                                <strong>Linux/macOS:</strong>
+                                <code>
+                                    sha256sum -c simpliload.zip.sha256
+                                </code>
+                            </li>
+                        </ul>
+                        <p>
+                            <strong>Getting Started:</strong>
+                            Extract the archive and review the included
+                            <em>SimpliLoad Deployment Guide.pdf</em>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Production Deployment -->
+        <section class="section founder-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Production Deployment</h2>
+                </div>
+                <div class="content-width">
+                    <p>
+                        SimpliLoad is officially distributed through
+                        the Azure Marketplace as a managed VM offering.
+                    </p>
+                    <p>
+                        Deploy directly within your Azure subscription and
+                        maintain complete control over security,
+                        networking, and operational boundaries.
+                    </p>
+                    <a
+                        href="https://marketplace.microsoft.com/en-us/product/hofstetr-cloud.simpliload?tab=Overview"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-primary">
+                        Deploy Through Azure Marketplace
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compatibility -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Compatibility</h2>
+                </div>
+                <div class="content-width">
+                    <p>
+                        SimpliLoad requires IBM Cognos Analytics
+                        version 12.1.3 or later.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>
+                © 2026 Hofstetter Computer Consulting LLC
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

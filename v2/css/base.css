@@ -65,6 +65,11 @@ body {
     margin: 0;
 }
 
+.content-width {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 h1,
 h2,
 h3,
@@ -274,17 +279,23 @@ p {
 
 .product-status {
     display: inline-block;
-
     background: #edf5ff;
     color: var(--primary);
-
     padding: .35rem .75rem;
     margin-top: 0.5rem;
-
     border-radius: 25px;
-
     font-size: .85rem;
     font-weight: 600;
+}
+
+.product-screenshot {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    display: block;
+    border: 1px solid var(--border-color);
 }
 
 .site-header {
