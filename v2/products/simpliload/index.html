@@ -164,86 +164,68 @@
             </div>
         </section>
 
-        <!-- Trial Download -->
-        <section id="trial-download" class="section">
+        <section id="get-started" class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2>
-                        Try SimpliLoad On-Premises
-                    </h2>
-                </div>
-                <div class="trial-card">
+                    <h2>Get Started</h2>
                     <p>
-                        Download the official SimpliLoad Trial Bundle containing
-                        everything required to launch a local evaluation
-                        environment including Docker Compose files,
-                        deployment documentation, EULA, and support policy.
+                        Choose the deployment option that best fits your environment.
                     </p>
-                    <div class="download-actions">
-                        <a
-                            href="downloads/simpliload.zip"
-                            class="btn btn-primary">
-                            Download Trial Bundle
-                        </a>
-                        <a
-                            href="downloads/simpliload.zip.sha256"
-                            class="btn btn-secondary"
-                            target="_blank"
-                            rel="noopener">
-                            SHA256 Checksum
-                        </a>
-                    </div>
-                    <div class="checksum-info">
-                        <p>
-                            <strong>Verify File Integrity</strong>
-                        </p>
-                        <ul>
-                            <li>
-                                <strong>Windows:</strong>
-                                <code>
-                                    Get-FileHash simpliload.zip -Algorithm SHA256
-                                </code>
-                            </li>
-                            <li>
-                                <strong>Linux/macOS:</strong>
-                                <code>
-                                    sha256sum -c simpliload.zip.sha256
-                                </code>
-                            </li>
-                        </ul>
-                        <p>
-                            <strong>Getting Started:</strong>
-                            Extract the archive and review the included
-                            <em>SimpliLoad Deployment Guide.pdf</em>.
-                        </p>
-                    </div>
                 </div>
-            </div>
-        </section>
+                <div class="product-grid">
+                    <!-- Trial Card -->
+                    <div class="card">
+                        <h3>Trial Version</h3>
+                        <p>
+                            Evaluate SimpliLoad locally using the official trial bundle,
+                            including deployment documentation, Docker Compose
+                            configuration, EULA, and support policy.
+                        </p>
+                        <div class="download-actions">
+                            <a
+                                href="downloads/simpliload.zip"
+                                class="btn btn-primary">
+                                Download Trial
+                            </a>
+                            <a
+                                href="downloads/simpliload.zip.sha256"
+                                class="btn btn-secondary"
+                                target="_blank"
+                                rel="noopener">
+                                SHA256 Checksum
+                            </a>
+                        </div>
+                        <div class="checksum-info">
+                            <p>
+                                <strong>Getting Started:</strong>
+                                Extract the archive and review the included
+                                <em>SimpliLoad Deployment Guide.pdf</em>.
+                            </p>
+                        </div>
+                    </div>
 
-        <!-- Production Deployment -->
-        <section class="section founder-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Production Deployment</h2>
-                </div>
-                <div class="content-width">
-                    <p>
-                        SimpliLoad is officially distributed through
-                        the Azure Marketplace as a managed VM offering.
-                    </p>
-                    <p>
-                        Deploy directly within your Azure subscription and
-                        maintain complete control over security,
-                        networking, and operational boundaries.
-                    </p>
-                    <a
-                        href="https://marketplace.microsoft.com/en-us/product/hofstetr-cloud.simpliload?tab=Overview"
-                        target="_blank"
-                        rel="noopener"
-                        class="btn btn-primary">
-                        Deploy Through Azure Marketplace
-                    </a>
+                    <!-- Production Card -->
+                    <div class="card">
+                        <h3>Production Deployment</h3>
+                        <p>
+                            Deploy SimpliLoad directly into your Azure subscription
+                            through the Azure Marketplace with full control over
+                            networking, security, and operational boundaries.
+                        </p>
+                        <a
+                            href="https://marketplace.microsoft.com/en-us/product/hofstetr-cloud.simpliload?tab=Overview"
+                            target="_blank"
+                            rel="noopener"
+                            class="btn btn-primary">
+                            Azure Marketplace
+                        </a>
+                        <p style="margin-top:1rem;">
+                            <a
+                                href="docs/azure-deployment.html">
+                                Review Deployment Guide
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
