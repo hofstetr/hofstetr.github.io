@@ -405,3 +405,24 @@ p {
     height: 100%;
     border: 0;
 }
+
+.contact-hero .hero-content {
+    flex: 1 1 auto;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-hero .hero-actions {
+    justify-content: center;
+}
+
+.contact-hero .official-contact {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #6f6f6f;
+}
+
+.contact-hero .official-contact a {
+    color: var(--primary);
+}
