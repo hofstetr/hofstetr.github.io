@@ -66,7 +66,7 @@ body {
 }
 
 .content-width {
-    max-width: 900px;
+    max-width: var(--content-width);
     margin: 0 auto;
 }
 
@@ -97,12 +97,12 @@ p {
 }
 
 .container {
-    width: min(1200px, 92%);
+    width: min(var(--container-width), 92%);
     margin: 0 auto;
 }
 
 .section {
-    padding: 4rem 0;
+    padding: var(--space-lg) 0;
 }
 
 .section-header {
@@ -120,10 +120,10 @@ p {
 }
 
 .card {
-    background: white;
+    background: var(--background);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 2rem;
+    padding: var(--space-md);
     box-shadow: var(--shadow-sm);
     transition: all .25s ease;
 }
@@ -168,17 +168,17 @@ p {
     background:
         linear-gradient(
             180deg,
-            #edf5ff 0%,
-            #ffffff 100%
+            var(--surface-alt) 0%,
+            var(--background) 100%
         );
 
-    padding: 4rem 0;
+    padding: var(--space-lg) 0;
 }
 
 .hero-layout {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: var(--space-md);
 }
 
 .hero-content {
@@ -228,9 +228,9 @@ p {
 .hero-actions {
     display: flex;
     justify-content: flex-start;
-    gap: 1rem;
+    gap: var(--space-sm);
 
-    margin-top: 2rem;
+    margin-top: var(--space-md);
 
     flex-wrap: wrap;
 }
@@ -247,14 +247,14 @@ p {
     }
 
     .hero-image {
-        margin-top: 2rem;
+        margin-top: var(--space-md);
     }
 }
 
 .product-grid {
     display: grid;
 
-    gap: 2rem;
+    gap: var(--space-md);
 
     grid-template-columns:
         repeat(auto-fit, minmax(300px, 1fr));
@@ -267,7 +267,7 @@ p {
     justify-content: space-between;
     align-items: flex-start;
 
-    margin-bottom: .5rem;
+    margin-bottom: var(--space-xs);
 }
 
 .product-logo {
@@ -283,12 +283,12 @@ p {
 
     display: block;
 
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-sm);
 }
 
 .product-status {
     display: inline-block;
-    background: #edf5ff;
+    background: var(--surface-alt);
     color: var(--primary);
     padding: .35rem .75rem;
     margin-top: 0.5rem;
@@ -330,7 +330,7 @@ p {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: var(--space-md);
 }
 
 .nav-links a {
@@ -339,17 +339,17 @@ p {
 }
 
 .products-section {
-    background: #f8fafc;
+    background: var(--surface);
 }
 
 .founder-section {
-    background: #edf5ff;
+    background: var(--surface-alt);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-sm);
 }
 
 .logo-mark {
@@ -387,4 +387,21 @@ p {
 .logo-tagline {
     font-size: .8rem;
     color: var(--text-muted);
+}
+
+.video-container {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    max-width: 100%;
+    margin: var(--space-md) 0;
+    border-radius: var(--radius-sm);
+}
+
+.video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
