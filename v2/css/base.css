@@ -267,6 +267,10 @@ p {
     margin-top: 3rem;
 }
 
+.product-logo {
+    width: 64px;
+}
+
 .site-header {
     position: sticky;
     top: 0;
