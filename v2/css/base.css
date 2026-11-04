@@ -277,6 +277,15 @@ p {
     display: block;
 }
 
+.product-hero-logo {
+    width: 180px;
+    height: auto;
+
+    display: block;
+
+    margin-bottom: 1rem;
+}
+
 .product-status {
     display: inline-block;
     background: #edf5ff;
