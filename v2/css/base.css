@@ -220,6 +220,10 @@ p {
     font-size: 3rem;
 }
 
+.hero h1 span {
+    color: var(--primary);
+}
+
 .hero p {
     max-width: none;
     margin: 0 auto;
