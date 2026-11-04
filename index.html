@@ -1,301 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hofstetter Computer Consulting provides enterprise software tools, consulting, and practical technology solutions for businesses.">
-    <meta name="keywords" content="Hofstetter Computer Consulting, enterprise tools, business software, technology consulting, enterprise solutions, software consulting">
-    <title>Hofstetter Computer Consulting - Enterprise Tools</title>
-    
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.hofstetr.cloud/" />
-    <meta property="og:title" content="Hofstetter Computer Consulting | SimpliLoad" />
-    <meta property="og:description" content="Hofstetter Computer Consulting provides automated load testing and performance engineering solutions like SimpliLoad, built specifically for IBM Cognos environments." />
-    <meta property="og:image" content="https://www.hofstetr.cloud/hcc_logo.png" />
-    <style>
-        :root {
-            --primary: #0f62fe;
-            --blue-header: #1E3A5F;
-            --dark: #161616;
-            --light: #f4f4f4;
-            --text: #393939;
-            --accent-bg: #edf5ff;
-            --border-color: #e0e0e0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: var(--blue-header);
-            color: #ffffff;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-        header p {
-            margin: 0.5rem 0 0;
-            font-size: 1.25rem;
-            color: #e0e0e0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 1rem;
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        /* Products Section */
-        .products {
-            margin-bottom: 3rem;
-        }
-        .products h2 {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-        }
-        .product-card {
-            background-color: var(--light);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-            margin-bottom: 1.5rem;
-        }
-        .product-card h3 {
-            margin-top: 0;
-            color: var(--dark);
-        }
-        .product-card p {
-            margin-bottom: 0.75rem;
-        }
-        .product-card a {
-            display: inline-block;
-            margin-top: 0.5rem;
-            color: var(--primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .product-card a:hover {
-            text-decoration: underline;
-        }
+    <title>Hofstetter Computer Consulting</title>
 
-        /* Existing SimpliLoad Sections */
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .hero h2 {
-            font-size: 2rem;
-            color: var(--dark);
-        }
-        .features {
-            background-color: var(--light);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 3rem;
-            border-left: 4px solid var(--primary);
-        }
-        .features h3 {
-            margin-top: 0;
-            color: var(--dark);
-        }
-        ul {
-            padding-left: 1.2rem;
-        }
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Trial Download Card */
-        .trial-card {
-            background-color: var(--accent-bg);
-            border: 1px solid #c6e2ff;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-        }
-        .trial-card h3 {
-            margin-top: 0;
-            color: var(--blue-header);
-            font-size: 1.5rem;
-        }
-        .trial-card p {
-            margin-bottom: 1rem;
-        }
-        .download-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-        .checksum-info {
-            font-size: 0.85rem;
-            color: #525252;
-            margin-top: 1rem;
-            word-break: break-all;
-            background: #ffffff;
-            padding: 0.75rem;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-        .checksum-info .getting-started {
-            margin-top: 0.75rem;
-            margin-bottom: 0;
-        }
-        .trial-card .production-deployment {
-            margin-top: 1rem;
-        }
-
-        /* Contact */
-        .contact {
-            text-align: center;
-            background-color: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            border-radius: 8px;
-        }
-        .contact .official-contact {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #6f6f6f;
-        }
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #0353e9;
-        }
-        .btn-secondary {
-            background-color: #ffffff;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-        .btn-secondary:hover {
-            background-color: #f0f4fe;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            font-size: 0.875rem;
-            color: #8d8d8d;
-            border-top: 1px solid var(--border-color);
-        }
-    </style>
+    <link rel="stylesheet" href="css/base.css">
 </head>
+
 <body>
 
-    <header>
-        <h1>Hofstetter Computer Consulting</h1>
-        <p>Enterprise Tools & Performance Engineering</p>
-    </header>
-
+<header class="site-header">
     <div class="container">
-
-        <!-- Products Section -->
-        <section class="products">
-            <h2>Products</h2>
-        
-            <div class="product-card">
-                <h3>SimpliLoad for Azure</h3>
-                <p>Deploy SimpliLoad directly into your Azure environment using the official Azure Marketplace offering. This is the recommended and fully supported way to run SimpliLoad in production.</p>
-                <a href="products/simpliload/docs/azure-deployment.html">Azure Deployment Guide →</a>
-            </div>
-        
-            <div class="product-card">
-                <h3>SimpliLoad Local Trial</h3>
-                <p>A local evaluation build intended for developers and administrators who want to explore SimpliLoad's capabilities before deploying through Azure Marketplace.</p>
-                <a href="#simpliload">Learn more →</a>
-            </div>
-        </section>
-
-        <!-- SimpliLoad Section -->
-        <section id="simpliload" class="hero">
-            <h2>Enterprise Performance Validation Made Simple</h2>
-            <p>SimpliLoad is a performance and load testing utility built specifically for <strong>IBM Cognos Analytics</strong> environments. It empowers BI administrators and infrastructure teams to validate server capacity, optimize environments, and confidently plan system upgrades.</p>
-            <p><strong>Production deployments:</strong> SimpliLoad is officially distributed through the Azure Marketplace as a managed VM offering.</p>
-            <p><strong>Evaluation:</strong> A local trial build is available for developers who wish to explore SimpliLoad before deploying in Azure.</p>
-
-            <!-- Embedded Demo Video -->
-            <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 2rem 0; border-radius: 8px;">
-                <iframe 
-                    src="https://www.youtube.com/embed/kN_CFL-9SXI?vq=hd1080&rel=0&hd=1" 
-                    title="SimpliLoad FP4 Performance & Load Testing Demo" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                </iframe>
+        <nav class="nav">
+            <div class="logo">
+                <div class="logo-mark">
+                    HCC
+                </div>
+                <div class="logo-text">
+                    <div class="logo-name">
+                        Hofstetter Computer Consulting
+                    </div>
+                    <div class="logo-tagline">
+                        Software for Cognos Administrators
+                    </div>
+                </div>
             </div>
 
-            <p><strong>Compatibility:</strong> SimpliLoad requires IBM Cognos Analytics version 12.1.3 or later, as earlier versions do not provide the REST API endpoints used for report execution.</p>
-        </section>
-
-        <section class="features">
-            <h3>Key Capabilities</h3>
-            <ul>
-                <li><strong>Azure-Managed Deployment:</strong> Runs inside your dedicated Azure VM, giving you full control over network boundaries, firewall rules, and operational security.</li>
-                <li><strong>Enterprise Security:</strong> Supports both organization-issued TLS certificates and automatically generated self-signed certificates, allowing you to enforce your internal security standards.</li>
-                <li><strong>REST API Native:</strong> Built specifically for IBM Cognos Analytics 12.1.3 and later, using the official REST API for accurate, reliable report execution and performance measurement.</li>
-                <li><strong>Streamlined Configuration:</strong> Configure SimpliLoad entirely through its web interface using only your Cognos REST API URL and API key—no additional credentials or namespaces required.</li>
-                <li><strong>Isolated Workloads:</strong> Each deployment operates within your own Azure subscription, ensuring that test activity remains fully isolated from other environments and workloads.</li>
-                <li><strong>Performance & Capacity Insights:</strong> Identify bottlenecks, validate infrastructure readiness, and simulate real-world Cognos workloads to support upgrade planning and environment optimization.</li>
-                <li><strong>Rapid Setup:</strong> Designed for minimal deployment friction—provision the VM, configure your REST API connection, and begin testing within minutes.</li>
-            </ul>
-        </section>
-
-        <!-- SimpliLoad Trial Bundle Download Card -->
-        <section class="trial-card">
-            <h3>Try SimpliLoad On-Premises</h3>
-            <p>Download the official SimpliLoad Trial Bundle containing everything required to launch a local evaluation environment, including the Docker Compose configuration, deployment documentation, EULA, and support policy.</p>
-            
-            <div class="download-actions">
-                <a href="products/simpliload/downloads/simpliload.zip" class="btn">Download Trial Bundle (.zip)</a>
-                <a href="products/simpliload/downloads/simpliload.zip.sha256" class="btn btn-secondary" target="_blank" rel="noopener">SHA256 Checksum</a>
+            <div class="nav-links">
+                <a href="#products">Products</a>
+                <a href="contact/">Contact</a>
             </div>
-
-            <div class="checksum-info">
-                <p><strong>Verify File Integrity:</strong> Download both files to the same directory and run the command for your OS:</p>
-                <ul>
-                    <li><strong>Windows (PowerShell):</strong> <code>Get-FileHash simpliload.zip -Algorithm SHA256</code></li>
-                    <li><strong>Linux / macOS:</strong> <code>sha256sum -c simpliload.zip.sha256</code></li>
-                </ul>
-                <p class="getting-started"><strong>Getting Started:</strong> Once verified, extract the archive and open the included <em>SimpliLoad Deployment Guide.pdf</em> for step-by-step setup instructions.</p>
-            </div>
-            <p class="production-deployment">
-                <strong>Ready for production?</strong> 
-                <a href="https://marketplace.microsoft.com/en-us/product/hofstetr-cloud.simpliload?tab=Overview" target="_blank" rel="noopener">Deploy SimpliLoad through the Azure Marketplace</a> 
-                or review the <a href="products/simpliload/docs/azure-deployment.html">Azure Deployment Guide</a> for step-by-step instructions.
-            </p>
-        </section>
-
-        <section class="contact">
-            <h3>Connect with Us</h3>
-            <p>Interested in a demo, technical evaluation, or partner inquiries? Reach out to our team directly.</p>
-            <a href="mailto:sales@hofstetr.cloud" class="btn">Contact via Email</a>
-            <p class="official-contact">Official Contact: sales@hofstetr.cloud</p>
-        </section>
+        </nav>
     </div>
+</header>
 
-    <footer>
-        <p>© 2026 Hofstetter Computer Consulting LLC, All rights reserved. IBM and Cognos are trademarks of International Business Machines Corporation.</p>
-    </footer>
+<main>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <h1>
+                        Decades of<br>
+                        <span>IBM Cognos Experience</span><br>
+                        Behind Every Tool
+                    </h1>
+
+                    <p class="hero-description">
+                        Practical software built to solve real administrative, operational, and performance challenges.
+                    </p>
+                </div>
+
+                <div class="hero-image">
+                    <img src="images/hero-workspace.webp"
+                        alt="Modern analytics workspace">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="section products-section">
+        <div class="container">
+
+            <div class="section-header">
+                <h2>Products</h2>
+            </div>
+
+            <div class="product-grid">
+                <div class="card">
+                    <div class="product-header">
+                        <img
+                            src="images/SimpliLoad_logo.webp"
+                            alt="SimpliLoad"
+                            class="product-logo">
+
+                        <span class="product-status">
+                            Available Today
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Performance and load testing for IBM Cognos Analytics
+                        environments.
+                    </p>
+
+                    <a href="products/simpliload/" class="btn btn-primary">
+                        Learn More
+                    </a>
+                </div>
+                <div class="card">
+
+                    <h3>Future Product</h3>
+
+                    <p>
+                        Additional administrative tooling currently under
+                        exploration.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Future Product</h3>
+
+                    <p>
+                        More purpose-built solutions for Cognos administrators
+                        coming soon.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>
+            © 2026 Hofstetter Computer Consulting LLC
+        </p>
+    </div>
+</footer>
 
 </body>
 </html>
