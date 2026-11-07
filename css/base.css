@@ -315,6 +315,7 @@ p {
 .site-header {
     position: sticky;
     top: 0;
+    z-index: 10;
     background: rgba(255,255,255,.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
