@@ -510,6 +510,13 @@ p {
     border: 0;
 }
 
+.video-note {
+    margin: calc(-1 * var(--space-sm)) 0 var(--space-md);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
 .download-verification {
     margin: var(--space-md) auto 0;
     padding: var(--space-md);
