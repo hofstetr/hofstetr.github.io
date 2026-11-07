@@ -33,6 +33,7 @@
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 2rem;
+    --space-md-lg: 3rem;
     --space-lg: 4rem;
     --space-xl: 6rem;
     --space-xxl: 8rem;
@@ -102,12 +103,12 @@ p {
 }
 
 .section {
-    padding: var(--space-lg) 0;
+    padding: var(--space-md-lg) 0;
 }
 
 .section-header {
     max-width: 700px;
-    margin: 0 auto 3rem;
+    margin: 0 auto var(--space-md);
     text-align: center;
 }
 
@@ -172,7 +173,7 @@ p {
             var(--background) 100%
         );
 
-    padding: var(--space-lg) 0;
+    padding: var(--space-md-lg) 0;
 }
 
 .hero-layout {
@@ -259,7 +260,7 @@ p {
     grid-template-columns:
         repeat(auto-fit, minmax(300px, 1fr));
 
-    margin-top: 3rem;
+    margin-top: var(--space-md-lg);
 }
 
 .product-header {
@@ -275,6 +276,10 @@ p {
     height: auto;
 
     display: block;
+}
+
+.product-hero {
+    padding: var(--space-md) 0;
 }
 
 .product-hero-logo {
@@ -350,12 +355,24 @@ p {
     color: var(--text-secondary);
 }
 
+.get-started-section {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-lg);
+}
+
 .products-section {
     background: var(--surface);
 }
 
+.capabilities-section {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-md-lg);
+}
+
 .overview-section {
     background: var(--surface-alt);
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-md-lg);
 }
 
 .overview-copy p:first-child {
@@ -471,6 +488,10 @@ p {
     color: var(--text-muted);
 }
 
+.video-section {
+    padding-top: var(--space-md);
+}
+
 .video-container {
     position: relative;
     aspect-ratio: 16 / 9;
@@ -531,6 +552,31 @@ p {
 
 .contact-hero .official-contact a {
     color: var(--primary);
+}
+
+.contact-card {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.contact-card h2 {
+    margin-bottom: var(--space-sm);
+}
+
+.contact-card .btn {
+    margin: var(--space-md) auto;
+}
+
+.contact-card .official-contact {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.official-contact a {
+    color: var(--blue-header);
+    font-weight: 600;
+    text-decoration: none;
 }
 
 @media (max-width: 600px) {
