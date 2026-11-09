@@ -356,6 +356,11 @@ p {
     font-weight: 600;
 }
 
+.planning {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
 .product-screenshot {
     width: 100%;
     max-width: 650px;
