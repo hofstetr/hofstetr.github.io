@@ -321,6 +321,16 @@ p {
     margin-top: var(--space-md-lg);
 }
 
+.product-grid .card {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-grid .card .btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
 .product-header {
     display: flex;
     justify-content: space-between;
