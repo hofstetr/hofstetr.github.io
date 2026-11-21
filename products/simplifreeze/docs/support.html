@@ -13,8 +13,8 @@
 <h2>1. Scope of Support</h2>
 <p>
   This Support Policy describes the support services provided by Hofstetter Computer Consulting LLC
-  (“Licensor”) for the SimpliFreeze software (“Software”) during active, paid subscription periods. Support 
-  is provided to assist customers with the installation, configuration, and operational troubleshooting 
+  (“Licensor”) for the SimpliFreeze software (“Software”) during active, paid subscription periods. Support
+  is provided to assist customers with the installation, configuration, and operational troubleshooting
   of the unmodified Software container.
 </p>
 <p>
@@ -24,7 +24,7 @@
   <li>guidance on deploying the official SimpliFreeze Docker Compose stack;</li>
   <li>configuration of supported SimpliFreeze environment variables and application settings;</li>
   <li>investigating and diagnosing verified application bugs or unexpected errors within the Software container;</li>
-  <li>clarification on test execution workflows, in-app documentation, and load report outputs.</li>
+  <li>clarification on schedule discovery, tagging, freeze/thaw workflows, snapshot import/export, and in-app help documentation.</li>
 </ul>
 
 <h2>2. Excluded Support (Out of Scope)</h2>
@@ -47,53 +47,53 @@
   <strong>Email:</strong> support@hofstetr.cloud
 </p>
 <p>
-  Support is available Monday through Friday during standard US business hours, excluding national holidays. 
-  Target initial response time is <strong>1 to 2 business days</strong>. Target response times are goals rather than 
+  Support is available Monday through Friday during standard US business hours, excluding national holidays.
+  Target initial response time is <strong>1 to 2 business days</strong>. Target response times are goals rather than
   guaranteed Service Level Agreements (SLAs).
 </p>
 
-<h2>4. Customer Responsibilities & Prerequisites</h2>
+<h2>4. Customer Responsibilities &amp; Prerequisites</h2>
 <p>
   To receive support, customers must:
 </p>
 <ul>
   <li>maintain a fully functioning deployment environment, including supported Docker Engine and Docker Compose versions;</li>
   <li>ensure the target IBM Cognos Analytics environment is reachable, operational, and properly licensed;</li>
-  <li>use an IBM Cognos Analytics environment running version 12.1.3 or later; earlier versions are not eligible for support because required REST API endpoints are unavailable;</li>
-  <li>attempt to reproduce the issue using the comprehensive deployment guide and in-app help system prior to submitting a ticket;</li>
-  <li>supply container execution logs, configuration files (sanitized of secrets), and clear reproduction steps upon request;</li>
+  <li>use an IBM Cognos Analytics environment running version 12.2.0 or later; earlier versions are not supported because the required REST API endpoints are unavailable;</li>
+  <li>attempt to reproduce the issue using the deployment guide and in-app help system prior to submitting a ticket;</li>
+  <li>supply container logs, configuration files (sanitized of secrets), and clear reproduction steps upon request;</li>
   <li>ensure no sensitive, confidential, or proprietary data is included in support logs or ticket attachments.</li>
 </ul>
 
-<h2>5. No Production Load Testing</h2>
+<h2>5. Bulk Schedule Changes &amp; Operational Caution</h2>
 <p>
-  The Software is designed for pre-production, staging, and sandbox validation. Licensor strongly advises against 
-  running load tests against production systems. Executing load tests against a production environment may cause service 
-  degradation, dispatcher failure, memory exhaustion, or unexpected outages.
+  Freezing, thawing, or importing schedule snapshots can affect automated report delivery and batch operations across
+  your IBM Cognos Analytics environment. Licensor strongly recommends reviewing target schedules and tags carefully—and
+  validating workflows in a non-production or staging environment first—before applying bulk changes to production.
 </p>
 <p>
-  If Licensee chooses to run load tests against a production environment, Licensee does so entirely at its own risk. 
-  Licensor shall have zero liability for downtime, performance loss, or operational disruption, and Licensor reserves 
-  the right to decline support for issues arising directly from production load testing.
+  If Licensee chooses to apply bulk schedule changes directly in production, Licensee does so at its own risk.
+  Licensor has no liability for missed or delayed scheduled jobs, operational disruption, or downstream impacts,
+  and reserves the right to decline support for issues resulting from unreviewed or improper bulk schedule changes.
 </p>
 
-<h2>6. Version Lifecycle & Upgrade Policy</h2>
+<h2>6. Version Lifecycle &amp; Upgrade Policy</h2>
 <p>
-  Support is provided strictly for the <strong>current major/minor release</strong> (or the immediately preceding minor version) 
-  of the SimpliFreeze container image. If an issue is reported on an outdated image version, Licensor's primary resolution 
-  step will be asking the customer to pull and deploy the latest release tag from the official container registry (`ghcr.io`).
+  Support is provided strictly for the <strong>current major/minor release</strong> (or the immediately preceding minor version)
+  of the SimpliFreeze container image. If an issue is reported on an outdated image version, Licensor's primary resolution
+  step will be asking the customer to pull and deploy the latest release tag from the official container registry (<code>ghcr.io</code>).
 </p>
 
 <h2>7. Maintenance and Bug Fixes</h2>
 <p>
-  During an active subscription term, Licensor will make reasonable efforts to resolve verified bugs or security vulnerabilities 
-  in the Software. Fixes, security patches, and minor enhancements will be delivered via updated container image releases published 
+  During an active subscription term, Licensor will make reasonable efforts to resolve verified bugs or security vulnerabilities
+  in the Software. Fixes, security patches, and minor enhancements will be delivered via updated container image releases published
   to the official registry. Customers are responsible for pulling and updating their local Docker Compose deployment.
 </p>
 
 <h2>8. Changes to This Support Policy</h2>
 <p>
-  Licensor may update this Support Policy from time to time. Updated versions are included with each new Software release. 
+  Licensor may update this Support Policy from time to time. Updated versions are included with each new Software release.
   Licensee's continued use of the Software after an update constitutes acceptance of the revised Support Policy.
 </p>
 
