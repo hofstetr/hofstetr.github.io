@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Azure deployment guide for SimpliFreeze, including VM setup, certificate options, access instructions, and Cognos REST API configuration.">
+<meta name="keywords" content="SimpliFreeze, Azure deployment, IBM Cognos Analytics, schedule management, schedule inventory, schedule discovery, freeze schedules, thaw schedules, Docker, Azure VM, Cognos REST API">
+<title>SimpliFreeze Azure Deployment Guide</title>
+<style>
+  :root {
+    --primary-color: #0067b8;
+    --text-color: #24292e;
+    --bg-color: #fdfdfd;
+    --code-bg: #f6f8fa;
+    --border-color: #e1e4e8;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 0.2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.3rem;
+    margin-top: 2.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  h4 {
+    font-size: 1.05rem;
+    margin-top: 1.2rem;
+  }
+  p, li {
+    font-size: 1rem;
+  }
+  ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  li {
+    margin-bottom: 0.4rem;
+  }
+  pre {
+    background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9rem;
+  }
+  code {
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+  }
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  blockquote {
+    border-left: 4px solid var(--primary-color);
+    background-color: #f1f8fc;
+    margin: 1rem 0;
+    padding: 0.8rem 1rem;
+    border-radius: 0 4px 4px 0;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 2rem 0;
+  }
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #586069;
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<h1>SimpliFreeze Azure Deployment Guide</h1>
+<hr>
+
+<h2>Overview</h2>
+<p>
+<strong>SimpliFreeze</strong> is a lightweight, Docker-based application
+that helps IBM Cognos Analytics administrators discover, organize,
+and manage schedules across Cognos environments. SimpliFreeze provides schedule discovery, inventory management,
+tagging, export and import capabilities, and licensed freeze and thaw
+operations while preserving original schedule state.
+</p>
+
+<h2>Prerequisites</h2>
+
+<h3>IBM Cognos Analytics</h3>
+<p>
+SimpliFreeze requires <strong>IBM Cognos Analytics 12.1.3 or later</strong>. Earlier versions are not supported because required REST API endpoints are unavailable.
+</p>
+
+<h3>Azure Requirements</h3>
+<ul>
+  <li>An active Azure subscription.</li>
+  <li>Permission to create virtual machines, networking resources, and public IP addresses.</li>
+</ul>
+
+<h3>User Requirements</h3>
+<ul>
+  <li>Cognos REST API URL.</li>
+  <li>Cognos API key.</li>
+  <li>Ability to configure firewall rules if Cognos is hosted on-premise or behind a VPN.</li>
+</ul>
+
+<h2>Deployment Steps in Azure Portal</h2>
+
+<h3>1. Start the Deployment</h3>
+<p>
+Open the Azure Marketplace listing for SimpliFreeze, select your desired plan (Trial, Standard, or Enterprise), and click <strong>Create</strong>.
+</p>
+
+<h3>2. Basics</h3>
+<p>Configure the foundational Azure resource settings for your virtual machine:</p>
+<ul>
+  <li><strong>Subscription:</strong> Select the active Azure subscription where billing and resource ownership will be managed.</li>
+  <li><strong>Resource Group:</strong> Choose an existing resource group or create a new dedicated one (e.g., <code>rg-simplifreeze-prod</code>) to keep all deployment assets grouped logically.</li>
+  <li><strong>Region:</strong> Select the Azure region closest to your users or your hosted IBM Cognos Analytics environment to minimize network latency. <em>Note: Depending on your subscription context or pre-selected scope, this prompt may be pre-populated or omitted automatically by the portal.</em></li>
+  <li><strong>Virtual Machine Name:</strong> Enter a unique identifier for the virtual machine resource (defaults to <code>simplifreezevm</code>).</li>
+  <li><strong>Admin Username:</strong> Enter the administrative username for logging into the virtual machine (avoid generic names like root or admin).</li>
+  <li><strong>Admin SSH Public Key:</strong> Paste your SSH RSA public key string (starting with <code>ssh-rsa</code>) for secure Linux authentication. If you need to generate a new key pair, open PowerShell and run: <code>ssh-keygen -t rsa -b 4096 -f "$env:USERPROFILE\.ssh\id_rsa"</code> (the public key will be saved to <code>$env:USERPROFILE\.ssh\id_rsa.pub</code>).</li>
+  <li><strong>Application Name:</strong> Specify a name for the managed application (ie. simplifreeze-app).</li>
+  <li><strong>Managed Application Resource Group:</strong> Specify or accept the managed resource group name where Azure will automatically provision and isolate the underlying solution resources and stock networking components.</li>
+</ul>
+
+<h3>3. SimpliFreeze Configuration</h3>
+<p>
+Configure initial application credentials and network access parameters:
+</p>
+<ul>
+  <li><strong>SimpliFreeze Admin Username:</strong> Set the primary administrator username for logging into the SimpliFreeze web application.</li>
+  <li><strong>SimpliFreeze Admin Email:</strong> Specify the contact email address for the SimpliFreeze administrator.</li>
+  <li><strong>SimpliFreeze Admin Password:</strong> Set a secure password for the primary administrator account (minimum 12 characters).</li>
+  <li><strong>Additional Allowed Hostnames / Load Balancer FQDN:</strong> Optional. Enter comma-separated external hostnames or domain names permitted to access the application. The VM name is included automatically.</li>
+  <li><strong>Cognos Allowed Hosts:</strong> Enter the hostnames or IP addresses of your IBM Cognos servers (comma-separated).</li>
+</ul>
+
+<h3>4. TLS Certificates</h3>
+<p>
+SimpliFreeze secures all web traffic using HTTPS. You must choose how application and CA certificates are provisioned during deployment:
+</p>
+
+<h4>Organization-Provided Certificates (Recommended for Production)</h4>
+<p>
+If your enterprise uses internally signed or enterprise CA certificates, upload the corresponding PEM-encoded files:
+</p>
+<ul>
+  <li><strong>TLS Certificate (server.crt):</strong> Upload your PEM/CRT public certificate or certificate chain file.</li>
+  <li><strong>TLS Private Key (server.key):</strong> Upload your PEM private key file.</li>
+  <li><strong>Cognos CA Certificate (cognos.pem):</strong> Optional. Upload the PEM CA certificate required to verify connections to your Cognos server over SSL/TLS.</li>
+</ul>
+<p>
+SimpliFreeze automatically mounts these credentials into <code>/opt/simplifreeze/deploy/certs/</code> for the NGINX reverse proxy container to ensure secure, trusted connections.
+</p>
+
+<h4>Automatically Generated Self-Signed Certificate (Default)</h4>
+<p>
+If you leave the certificate upload fields blank, SimpliFreeze automatically generates a secure self-signed certificate upon first boot. While fully encrypted, your browser will display an initial security warning until you trust the certificate locally or replace it later. If a public IP address is configured, it is automatically injected as a Subject Alternative Name (SAN).
+</p>
+
+<h3>5. Networking &amp; Public IP</h3>
+<p>Configure networking settings for your deployment:</p>
+<ul>
+  <li><strong>Managed Network:</strong> SimpliFreeze automatically deploys using a stock network configuration within the managed resource group, streamlining setup without requiring custom virtual network or subnet provisioning.</li>
+  <li><strong>Public IP Address:</strong> Select <code>New</code> to create a dynamic or static public IP, or select <code>None</code> to keep the virtual machine entirely private within your network.</li>
+  <li><strong>DNS Name Label Prefix:</strong> If you choose to enable a public IP address, enter a unique prefix to establish an Azure-managed fully qualified domain name (FQDN), such as <code>&lt;prefix&gt;.&lt;region&gt;.cloudapp.azure.com</code>.</li>
+</ul>
+
+<h3>6. Review + Create</h3>
+<p>
+Azure runs a final automated validation check against your parameter inputs. Once validation passes, click <strong>Create</strong> to provision the infrastructure and trigger the automated installation script.
+</p>
+
+<h2>Post-Deployment Steps</h2>
+
+<h3>Accessing & Network Configuration</h3>
+<p>
+  SimpliFreeze enforces an allowed-hosts list for security. During deployment, the VM's hostname and any provisioned public IP address are automatically added to <code>ALLOWED_HOSTS</code>.
+</p>
+
+<h4>1. Inbound Access (Reaching SimpliFreeze)</h4>
+<p>
+  To reach the SimpliFreeze interface, inbound traffic on <strong>Port 443 (HTTPS)</strong> or <strong>Port 80 (HTTP)</strong> must be permitted:
+</p>
+
+<ul>
+  <li><strong>Public Access:</strong> If deployed with a Public IP, ports 80 and 443 are automatically opened in the Network Security Group during deployment. You can access SimpliFreeze immediately using your configured DNS label or public FQDN, for example:
+    <pre><code>https://simplifreeze-prod.eastus.cloudapp.azure.com/simplifreeze/</code></pre>
+  </li>
+  <li><strong>Private / VNet-Peered Access:</strong> If deployed without a Public IP to keep SimpliFreeze completely isolated within your network, ensure your internal Network Security Groups allow inbound web traffic on ports 80/443, and configure access via:
+    <ul>
+      <li><strong>VNet Peering:</strong> Connect your internal corporate or application Virtual Network to <code>simplifreeze-vnet</code> to route traffic over Azure’s private backbone.</li>
+      <li><strong>Private DNS:</strong> Add an entry in your Azure Private DNS Zone or corporate DNS server pointing your internal hostname to the VM's private IP.</li>
+      <li><strong>Certificates:</strong> Ensure your TLS certificate covers your internal domain name or private IP to avoid browser security warnings.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>2. Outbound Access (Connecting to Cognos)</h4>
+<p>
+  Regardless of whether SimpliFreeze is deployed with a Public or Private IP, it must establish outbound connections to your Cognos Analytics environment to discover and manage schedules.
+</p>
+<p>
+  Ensure your Network Security Groups (NSGs) and corporate firewalls allow outbound traffic from the SimpliFreeze VM to your Cognos server:
+</p>
+<ul>
+  <li><strong>Port 9300:</strong> Standard for direct communication with the Cognos Dispatcher / Content Manager.</li>
+  <li><strong>Port 443 / 80:</strong> If traffic is routed through an internal web gateway, IIS, or reverse proxy.</li>
+</ul>
+
+<h3>Administrative SSH Access</h3>
+<p>
+  Direct SSH access is completely optional and disabled by default. If your team requires SSH access, you must first open <strong>Port 22</strong> via an inbound Network Security Group (NSG) rule or connect through an Azure Bastion / private VPN.
+</p>
+<p>
+  Once network access is established, authenticate using the RSA key created during deployment:
+</p>
+
+<pre><code>ssh &lt;admin-user&gt;@&lt;hostname-or-private-ip&gt;</code></pre>
+
+<p>
+  <em>Note: If you generated your key using the default path (<code>$env:USERPROFILE\.ssh\id_rsa</code>), your SSH client will use it automatically without requiring additional flags.</em>
+</p>
+
+<p>Docker containers are located under:</p>
+
+<pre><code>/opt/simplifreeze/</code></pre>
+
+<h2>Connecting to Cognos</h2>
+<p>
+All Cognos configuration is performed inside the SimpliFreeze UI.
+</p>
+
+<p>On the <strong>Settings</strong> page, enter:</p>
+<ul>
+  <li>Cognos REST API URL</li>
+  <li>API Key</li>
+</ul>
+
+<p>
+Click <strong>Test</strong> to verify connectivity.
+</p>
+
+<h2>Updating SimpliFreeze</h2>
+<p>To update SimpliFreeze:</p>
+
+<pre><code>docker compose pull
+docker compose up -d</code></pre>
+
+<h2>Troubleshooting</h2>
+<p>
+  This section provides practical guidance for diagnosing and resolving common issues encountered during deployment or operation in Azure. Each item includes likely causes, recommended fixes, and steps for reviewing logs inside the SimpliFreeze VM.
+</p>
+
+<h3>Invalid Certificate Errors</h3>
+<p><strong>Common Causes:</strong></p>
+<ul>
+  <li>The Cognos CA certificate is missing or not in PEM format.</li>
+  <li>The Cognos CA certificate path in <code>.env</code> is incorrect.</li>
+  <li>Hostname verification is enabled but the Cognos certificate CN/SAN does not match.</li>
+  <li>The VM's HTTPS certificate (self-signed or organization-issued) is unreadable by the container.</li>
+</ul>
+
+<p><strong>Fixes:</strong></p>
+<ul>
+  <li>Verify the Cognos CA certificate exists on the VM and is valid PEM.</li>
+  <li>Confirm the corresponding path in <code>.env</code> points to the correct file.</li>
+  <li><strong>For Testing / Self-Signed Certs:</strong> Disable hostname verification in your <code>.env</code> configuration if self-signed defaults trigger a mismatch.</li>
+  <li><strong>For Production:</strong> Ensure the Cognos server certificate's CN or SAN strictly matches the hostname used in the SimpliFreeze Settings page.</li>
+  <li>Check file permissions for the installed certificate and key inside the VM.</li>
+</ul>
+
+<h3>Connection Failures to Cognos</h3>
+<p><strong>Common Causes:</strong></p>
+<ul>
+  <li>Cognos is not reachable from the Azure VM.</li>
+  <li>Firewall rules or network ACLs block outbound traffic.</li>
+  <li>Incorrect Cognos hostname or port in the Settings page.</li>
+  <li><code>COGNOS_ALLOW_HTTP=false</code> in <code>.env</code> while Cognos is only serving HTTP.</li>
+</ul>
+
+<p><strong>Fixes:</strong></p>
+<ul>
+  <li>From the VM, test reachability using <code>curl -v https://your-cognos-host</code> or <code>curl -v http://your-cognos-host</code>.</li>
+  <li>Verify that outbound traffic from the VM to Cognos is allowed by your network team.</li>
+  <li>Update the Cognos REST API URL in the Settings page to match the actual hostname and port.</li>
+  <li>If Cognos is only available over HTTP and your organization accepts that risk, set <code>COGNOS_ALLOW_HTTP=true</code> in <code>.env</code> and restart the stack.</li>
+</ul>
+
+<h3>Authentication Issues</h3>
+<p><strong>Common Causes:</strong></p>
+<ul>
+  <li>The Cognos API key was copied incorrectly (extra spaces, hidden characters).</li>
+  <li>The API key has expired.</li>
+  <li>The API key has been <strong>locked</strong> in Cognos.</li>
+  <li>The API key was deleted or regenerated but not updated in SimpliFreeze.</li>
+  <li>The Cognos user associated with the API key lacks permission to access schedules.</li>
+  <li>The Cognos user account is disabled or suspended.</li>
+</ul>
+
+<p><strong>Fixes:</strong></p>
+<ul>
+  <li>Open Cognos Analytics → <em>Manage → Accounts → (User) → API Keys</em> and verify the key is active, not expired, not locked, and not deleted.</li>
+  <li>Re-copy the API key carefully and paste it into the SimpliFreeze Settings page.</li>
+  <li>If the key is locked or expired, generate a new API key.</li>
+  <li>Ensure the Cognos user has sufficient permissions to view and manage schedules within the target Cognos environment.</li>
+  <li>If the user account is disabled, re-enable it or create a new API key.</li>
+</ul>
+
+<blockquote>
+  <strong>Important:</strong> If an API key is locked, expired, or deleted in Cognos Analytics, it cannot be recovered. A new key must be generated and updated in the SimpliFreeze Settings page.
+</blockquote>
+
+<h3>Slow or Incomplete Schedule Discovery</h3>
+
+<p><strong>Common Causes:</strong></p>
+
+<ul>
+  <li>Large Cognos environments containing thousands of schedules.</li>
+  <li>Network latency between Azure and Cognos.</li>
+  <li>Slow Cognos REST API responses.</li>
+  <li>High utilization on the Cognos Content Manager.</li>
+  <li>The configured schedule retrieval limit has been reached.</li>
+</ul>
+
+<p><strong>Fixes:</strong></p>
+
+<ul>
+  <li>Verify network connectivity between Azure and Cognos.</li>
+  <li>Review Cognos server health and Content Manager performance.</li>
+  <li>Perform schedule refreshes during lower utilization periods.</li>
+  <li>Review the configured schedule retrieval limit.</li>
+</ul>
+
+<p>
+  SimpliFreeze retrieves schedules using the
+  <code>SIMPLIFREEZE_SCHEDULE_LIMIT</code> environment variable.
+</p>
+
+<p>
+  If the number of available Cognos schedules exceeds this limit,
+  SimpliFreeze may not retrieve every schedule during discovery.
+  When the configured limit is reached, SimpliFreeze displays a
+  warning indicating that additional schedules may exist.
+</p>
+
+<p>
+  To increase the retrieval limit, edit:
+</p>
+
+<pre><code>/opt/simplifreeze/.env</code></pre>
+
+<p>
+  Then update:
+</p>
+
+<pre><code>SIMPLIFREEZE_SCHEDULE_LIMIT=10000</code></pre>
+
+<p>
+  After modifying the value, restart the application:
+</p>
+
+<pre><code>docker compose up -d</code></pre>
+
+<h3>Container Startup Errors</h3>
+<p><strong>Common Causes:</strong></p>
+<ul>
+  <li>Uploaded certificates are invalid or not in a supported format.</li>
+  <li>PostgreSQL container failed to initialize due to invalid credentials or disk issues.</li>
+  <li>Volume permissions preventing PostgreSQL from writing data.</li>
+</ul>
+
+<p><strong>Fixes:</strong></p>
+<ul>
+  <li>Verify that uploaded certificates are valid PEM files and were accepted during deployment.</li>
+  <li>Ensure database credentials in <code>.env</code> have not been modified after deployment.</li>
+  <li>Check filesystem permissions and confirm the VM's OS disk is healthy and writable.</li>
+</ul>
+
+<h3>Important File Locations</h3>
+<p>
+  The SimpliFreeze VM stores all configuration files, certificates, and Docker resources under a single directory. These files are useful when troubleshooting, enabling DEBUG logging, or verifying certificate installation.
+</p>
+
+<ul>
+  <li>
+    <strong>Application Directory:</strong><br>
+    <code>/opt/simplifreeze/</code><br>
+    Contains the Docker Compose stack, environment file, certificates, and support scripts.
+  </li>
+  <li>
+  <strong>Environment File:</strong><br>
+  <code>/opt/simplifreeze/.env</code><br>
+  Stores runtime configuration values, including Cognos connectivity
+  settings, allowed hosts, schedule retrieval limits, licensing
+  configuration, and logging settings.
+  </li>
+    <li>
+      <strong>Certificates:</strong><br>
+      <code>/opt/simplifreeze/deploy/certs/</code><br>
+      Contains the HTTPS certificate and key used by NGINX, as well as any Cognos CA certificate uploaded during deployment.
+    </li>
+  <li>
+    <strong>Docker Compose File:</strong><br>
+    <code>/opt/simplifreeze/docker-compose.yml</code><br>
+    Defines the SimpliFreeze services (web, nginx, db) and their configuration.
+  </li>
+  <li>
+    <strong>Log Files (via Docker):</strong>
+    <pre><code>docker compose logs -f web
+docker compose logs -f nginx
+docker compose logs -f db</code></pre>
+    Logs are streamed from containers rather than stored as files.
+  </li>
+</ul>
+
+<p>
+  These locations are consistent across all Azure plans and do not change when resizing the VM or updating SimpliFreeze.
+</p>
+
+<p><strong>Recommended Diagnostic Workflow:</strong></p>
+<ol>
+  <li>Start with <code>docker compose logs -f simplifreeze-web-1</code> to identify application-level errors.</li>
+  <li>Check <code>docker compose logs -f simplifreeze-nginx-1</code> for certificate or routing issues.</li>
+  <li>Review <code>docker compose logs -f simplifreeze-db-1</code> for database initialization or storage issues.</li>
+  <li>Temporarily set <code>LOG_LEVEL=DEBUG</code> in <code>.env</code> for deeper insight into Cognos REST interactions, then run <code>docker compose up -d</code> to apply changes.</li>
+</ol>
+
+<blockquote>
+  <strong>Note:</strong> Always return <code>LOG_LEVEL</code> to <code>INFO</code> after troubleshooting to avoid excessive log output.
+</blockquote>
+
+<footer>
+  <p>© 2026 Hofstetter Computer Consulting LLC, All rights reserved. IBM and Cognos are trademarks of International Business Machines Corporation.</p>
+</footer>
+
+</body>
+</html>
