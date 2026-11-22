@@ -147,8 +147,14 @@ Open the Azure Marketplace listing for SimpliLoad, select your desired plan (Tri
 <h4>VM Size</h4>
 <p>Select the hardware tier appropriate for your workload capacity:</p>
 <ul>
-  <li><strong>Trial Plan:</strong> Restricted to <code>Standard_D2s_v4</code> (2 vCPUs, 8 GiB RAM).</li>
-  <li><strong>Single and Unlimited Plans:</strong> Flexible scaling options including <code>Standard_D2s_v4</code>, <code>Standard_D4s_v4</code>, or <code>Standard_D8s_v4</code> based on concurrent report volume.</li>
+  <li><strong>Trial Plan:</strong> Restricted to <code>Standard_B2s</code> Burstable (2 vCPUs, 4 GB RAM).</li>
+  <li><strong>Single and Unlimited Plans:</strong> Flexible scaling options including 
+    <code>Standard_B2s</code> Burstable (2 vCPUs, 4 GB RAM), 
+    <code>Standard_B2ms</code> Burstable (2 vCPUs, 8 GB RAM),
+    <code>Standard_D2s_v5</code> (2 vCPUs, 8 GB RAM), 
+    <code>Standard_D4s_v5</code> (4 vCPUs, 16 GB RAM),
+    <code>Standard_D8s_v5</code> (8 vCPUs, 32 GB RAM)
+    based on concurrent report volume.</li>
 </ul>
 
 <h3>3. SimpliLoad Configuration</h3>
@@ -286,7 +292,7 @@ docker compose up -d</code></pre>
   <li>The Cognos CA certificate is missing or not in PEM format.</li>
   <li>The Cognos CA certificate path in <code>.env</code> is incorrect.</li>
   <li>Hostname verification is enabled but the Cognos certificate CN/SAN does not match.</li>
-  <li>The VM’s HTTPS certificate (self-signed or organization-issued) is unreadable by the container.</li>
+  <li>The VM's HTTPS certificate (self-signed or organization-issued) is unreadable by the container.</li>
 </ul>
 
 <p><strong>Fixes:</strong></p>
@@ -294,7 +300,7 @@ docker compose up -d</code></pre>
   <li>Verify the Cognos CA certificate exists on the VM and is valid PEM.</li>
   <li>Confirm the corresponding path in <code>.env</code> points to the correct file.</li>
   <li><strong>For Testing / Self-Signed Certs:</strong> Disable hostname verification in your <code>.env</code> configuration if self-signed defaults trigger a mismatch.</li>
-  <li><strong>For Production:</strong> Ensure the Cognos server certificate’s CN or SAN strictly matches the hostname used in the SimpliLoad Settings page.</li>
+  <li><strong>For Production:</strong> Ensure the Cognos server certificate's CN or SAN strictly matches the hostname used in the SimpliLoad Settings page.</li>
   <li>Check file permissions for the installed certificate and key inside the VM.</li>
 </ul>
 
