@@ -53,13 +53,10 @@ postgresPassword="$(openssl rand -hex 16)"
 echo "== Computing ASGI_THREADS from VM size =="
 
 case "$vmSize" in
-  "Standard_D2s_v4")
-    asgiThreads="20"
-    ;;
-  "Standard_D4s_v4")
+  *D4s*|*D4as*)
     asgiThreads="40"
     ;;
-  "Standard_D8s_v4")
+  *D8s*|*D8as*)
     asgiThreads="80"
     ;;
   *)
